@@ -34,11 +34,11 @@ body {
 .lang-bar {
   position: fixed;
   top: env(safe-area-inset-top, 0px);
-  right: max(32px, env(safe-area-inset-right, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
   z-index: 200;
   display: flex;
   gap: 2px;
-  padding-top: 14px;
+  padding-top: 60px;
 }
 .lang-btn {
   background: rgba(10,10,15,0.88);
@@ -77,8 +77,8 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding-block: 10px;
-  padding-left: max(32px, env(safe-area-inset-left, 0px));
-  padding-right: max(200px, env(safe-area-inset-right, 0px));
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
   background: linear-gradient(to bottom, rgba(10,10,15,0.95) 0%, transparent 100%);
   backdrop-filter: blur(12px);
 }
@@ -515,21 +515,87 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
 .gold-rule { height: 1px; background: linear-gradient(90deg, transparent, var(--champ), transparent); opacity: 0.5; border: none; }
 
 /* ─── RESPONSIVE ─── */
+/* ─── HAMBURGER ─── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 210;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--champ);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ─── MOBILE MENU DRAWER ─── */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(9,9,14,0.97);
+  backdrop-filter: blur(16px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding-bottom: 80px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 1.4rem;
+  font-family: var(--serif);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--ivory);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--champ); }
+.mobile-menu .mobile-lang {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+.mobile-menu .mobile-cta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  font-family: var(--sans);
+  border: 1px solid var(--border-hi);
+  color: var(--champ);
+  padding: 12px 32px;
+  margin-top: 8px;
+}
+
 @media (max-width: 900px) {
   .services-header { grid-template-columns: 1fr; gap: 20px; }
   .services-grid { grid-template-columns: 1fr; }
   .artist-layout { grid-template-columns: 1fr; gap: 44px; }
   .artist-info { padding-left: 0; }
   .artist-frame { max-height: 320px; }
-  .events-grid { grid-template-columns: 1fr; }
   .dj-layout { grid-template-columns: 1fr; gap: 44px; }
   .dj-sidebar { position: static; }
   .why-grid { grid-template-columns: 1fr 1fr; }
   .contact-layout { grid-template-columns: 1fr; }
   .hero-logo-wrap { width: min(280px, 65vw); }
   .nav-links { display: none; }
-  nav { padding-right: max(160px, env(safe-area-inset-right, 0px)); }
-  /* Partner cards: stack flyer above text on tablet */
+  .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .lang-bar { display: none; }
+  nav { padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  /* Partner cards */
   .partner-card-grid { grid-template-columns: 1fr !important; }
   .partner-flyer { min-height: 260px; max-height: 300px; }
   .section-title { font-size: 2rem; }
@@ -537,21 +603,18 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
 @media (max-width: 600px) {
   .hero-tagline { font-size: 1.4rem; }
   .hero-sub { font-size: 0.7rem; }
-  .hero-actions { gap: 14px; }
-  .btn-primary, .btn-ghost { padding: 13px 22px; font-size: 0.8rem; }
+  .hero-actions { gap: 14px; flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-ghost { padding: 13px 22px; font-size: 0.8rem; text-align: center; justify-content: center; }
   .why-grid { grid-template-columns: 1fr; }
   .artist-stats { grid-template-columns: 1fr 1fr; }
   .contact-form-wrap { padding: 26px 18px; }
-  .lang-bar { right: max(12px, env(safe-area-inset-right, 0px)); }
-  nav { padding-right: max(130px, env(safe-area-inset-right, 0px)); }
-  /* Partner cards: stack flyer above text on mobile */
+  /* Partner cards */
   .partner-card-grid { grid-template-columns: 1fr !important; }
   .partner-flyer { min-height: 220px; max-height: 260px; }
   .section-label { font-size: 0.68rem; }
   .section-title { font-size: 1.7rem; }
   .inner { padding-top: 64px; padding-bottom: 64px; }
   .service-card { padding: 28px 20px; }
-  .event-card { padding: 28px 20px; }
   .stat-num { font-size: 2rem; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
 }
@@ -575,7 +638,6 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   <ul class="nav-links">
     <li><a href="#services"><span data-lang="en">Services</span><span data-lang="th">บริการ</span><span data-lang="lo">ບໍລິການ</span></a></li>
     <li><a href="#artist"><span data-lang="en">Artist</span><span data-lang="th">ศิลปิน</span><span data-lang="lo">ສິລະປິນ</span></a></li>
-    <li><a href="#events"><span data-lang="en">Events</span><span data-lang="th">อีเวนต์</span><span data-lang="lo">ງານ</span></a></li>
     <li><a href="#dj">PVRE DJ</a></li>
     <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="th">ติดต่อ</span><span data-lang="lo">ຕິດຕໍ່</span></a></li>
   </ul>
@@ -584,7 +646,22 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
     <span data-lang="th">ติดต่อเรา</span>
     <span data-lang="lo">ຕິດຕໍ່ພວກເຮົາ</span>
   </a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services" onclick="closeMobileMenu()"><span data-lang="en">Services</span><span data-lang="th">บริการ</span><span data-lang="lo">ບໍລິການ</span></a>
+  <a href="#artist" onclick="closeMobileMenu()"><span data-lang="en">Artist</span><span data-lang="th">ศิลปิน</span><span data-lang="lo">ສິລະປິນ</span></a>
+  <a href="#dj" onclick="closeMobileMenu()">PVRE DJ</a>
+  <a href="#contact" onclick="closeMobileMenu()" class="mobile-cta"><span data-lang="en">Contact Us</span><span data-lang="th">ติดต่อเรา</span><span data-lang="lo">ຕິດຕໍ່ພວກເຮົາ</span></a>
+  <div class="mobile-lang">
+    <button onclick="setLang('en');closeMobileMenu()">EN</button>
+    <button onclick="setLang('th');closeMobileMenu()">TH</button>
+    <button onclick="setLang('lo');closeMobileMenu()">LO</button>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
 <section class="hero" id="top">
@@ -814,10 +891,8 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   </div>
 </section>
 
-<hr class="gold-rule">
-
-<!-- ══════════════════════════════════════ EVENTS ══════════════════════════════════════ -->
-<section class="events-section" id="events">
+<!-- EVENTS SECTION REMOVED -->
+<section class="events-section" id="events" style="display:none">
   <div class="inner">
     <div class="events-header">
       <div>
@@ -887,8 +962,6 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
     </div>
   </div>
 </section>
-
-<hr class="gold-rule">
 
 <!-- ══════════════════════════════════════ DJ BOOKING ══════════════════════════════════════ -->
 <section class="dj-section" id="dj">
@@ -1211,6 +1284,16 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
 </footer>
 
 <script>
+/* ─── Mobile Menu ─── */
+function closeMobileMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+document.getElementById('hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+});
+
 /* ─── Language Switcher ─── */
 function setLang(lang) {
   document.body.className = (document.body.className.replace(/lang-\w+/g,'').trim()) + ' lang-' + lang;
