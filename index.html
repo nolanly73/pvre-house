@@ -36,7 +36,7 @@ body {
   top: env(safe-area-inset-top, 0px);
   right: max(16px, env(safe-area-inset-right, 0px));
   z-index: 200;
-  display: flex;
+  display: none;
   gap: 2px;
   padding-top: 60px;
 }
@@ -123,6 +123,7 @@ body::before {
 }
 .nav-links a:hover { color: var(--champ); }
 .nav-cta {
+  display: none;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -517,7 +518,7 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
 /* ─── RESPONSIVE ─── */
 /* ─── HAMBURGER ─── */
 .nav-hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 5px;
   background: none;
@@ -590,16 +591,22 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   .why-grid { grid-template-columns: 1fr 1fr; }
   .contact-layout { grid-template-columns: 1fr; }
   .hero-logo-wrap { width: min(280px, 65vw); }
-  .nav-links { display: none !important; }
-  .nav-cta { display: none !important; }
-  .nav-hamburger { display: flex !important; }
-  .lang-bar { display: none !important; }
+  .nav-links { display: none; }
   nav { padding-right: max(16px, env(safe-area-inset-right, 0px)); }
   /* Partner cards */
   .partner-card-grid { grid-template-columns: 1fr !important; }
   .partner-flyer { min-height: 260px; max-height: 300px; }
   .section-title { font-size: 2rem; }
 }
+
+/* ─── DESKTOP: show nav elements, hide hamburger ─── */
+@media (min-width: 1025px) {
+  .lang-bar { display: flex; }
+  .nav-cta { display: block; }
+  .nav-links { display: flex; }
+  .nav-hamburger { display: none; }
+}
+
 @media (max-width: 600px) {
   .hero-tagline { font-size: 1.4rem; }
   .hero-sub { font-size: 0.7rem; }
