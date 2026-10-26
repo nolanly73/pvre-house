@@ -579,7 +579,7 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   margin-top: 8px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .services-header { grid-template-columns: 1fr; gap: 20px; }
   .services-grid { grid-template-columns: 1fr; }
   .artist-layout { grid-template-columns: 1fr; gap: 44px; }
@@ -590,10 +590,10 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   .why-grid { grid-template-columns: 1fr 1fr; }
   .contact-layout { grid-template-columns: 1fr; }
   .hero-logo-wrap { width: min(280px, 65vw); }
-  .nav-links { display: none; }
-  .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
-  .lang-bar { display: none; }
+  .nav-links { display: none !important; }
+  .nav-cta { display: none !important; }
+  .nav-hamburger { display: flex !important; }
+  .lang-bar { display: none !important; }
   nav { padding-right: max(16px, env(safe-area-inset-right, 0px)); }
   /* Partner cards */
   .partner-card-grid { grid-template-columns: 1fr !important; }
