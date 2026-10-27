@@ -149,24 +149,12 @@ body::before {
   overflow: hidden;
   background: #09090E;
 }
-/* Vidéo de fond hero */
-.hero-video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-.hero-video.loaded { opacity: 1; }
 /* Logo en fond animé */
 .hero-bg {
   position: absolute; inset: 0;
   background:
-    linear-gradient(to bottom, rgba(9,9,14,0.55) 0%, rgba(9,9,14,0.35) 40%, rgba(9,9,14,0.6) 100%),
-    radial-gradient(ellipse 55% 55% at 50% 44%, rgba(168,168,200,0.05) 0%, transparent 70%);
-  z-index: 1;
+    radial-gradient(ellipse 55% 55% at 50% 44%, rgba(168,168,200,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 30% at 50% 44%, rgba(200,200,240,0.04) 0%, transparent 50%);
 }
 /* Logo fond hero animé — assemblage */
 .hero-logo-bg {
@@ -180,7 +168,6 @@ body::before {
   width: min(95vw, 900px);
   pointer-events: none;
   user-select: none;
-  z-index: 2;
 }
 /* Les 3 paths du monogramme s'assemblent */
 .hero-svg-wrap .svg-part-p {
@@ -223,14 +210,13 @@ body::before {
   left: 0; right: 0;
   height: 1px;
   background: linear-gradient(to right, transparent, rgba(168,168,200,0.15) 20%, rgba(168,168,200,0.15) 80%, transparent);
-  z-index: 2;
 }
 .hero-rule-top { top: 15%; }
 .hero-rule-bot { bottom: 15%; }
 /* Contenu centré */
 .hero-center {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -686,9 +672,6 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
 
 <!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
 <section class="hero" id="top">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto" oncanplay="this.classList.add('loaded')">
-    <source src="hero-bg.mp4" type="video/mp4">
-  </video>
   <div class="hero-bg"></div>
   <div class="hero-svg-wrap" aria-hidden="true">
   <svg viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
