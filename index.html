@@ -1345,7 +1345,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   var data = {
     name: document.getElementById('name').value,
     email: document.getElementById('email').value,
-    service: document.getElementById('service').value,
+    service: (function() { var sel = document.getElementById('service'); var opt = sel.options[sel.selectedIndex]; var lang = (document.body.className.match(/lang-(\w+)/) || ['','en'])[1]; var span = opt.querySelector('[data-lang="' + lang + '"]'); return span ? span.textContent.trim() : opt.text.trim(); })(),
     message: document.getElementById('message').value
   };
   fetch('https://api.web3forms.com/submit', {
