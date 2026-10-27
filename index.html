@@ -1341,8 +1341,27 @@ document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el
 /* ─── Form Submit ─── */
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  this.style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
+  var form = this;
+  var data = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    service: document.getElementById('service').value,
+    message: document.getElementById('message').value
+  };
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(Object.assign(data, { access_key: 'f76a26e7-a10d-48b5-ab50-43068a2a215c', subject: 'New booking request — PVRE HOUSE', from_name: 'PVRE HOUSE Website', replyto: data.email }))
+  }).then(function(r) {
+    if (r.ok) {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      alert('Error sending message. Please try again.');
+    }
+  }).catch(function() {
+    alert('Error sending message. Please try again.');
+  });
 });
 
 /* ─── Smooth Scroll ─── */
