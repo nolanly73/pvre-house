@@ -160,6 +160,98 @@ body::before {
   transition: opacity 1s ease;
 }
 .hero-video.loaded { opacity: 1; }
+
+/* ── Flash / lumières ── */
+.hero-flashes {
+  position: absolute; inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+/* Flash blanc global (éclair court) */
+.flash-global {
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0);
+  animation: flashGlobal 8s infinite;
+}
+@keyframes flashGlobal {
+  0%   { background: rgba(255,255,255,0); }
+  4%   { background: rgba(255,255,255,0.18); }
+  4.3% { background: rgba(255,255,255,0); }
+  4.7% { background: rgba(255,255,255,0.10); }
+  5%   { background: rgba(255,255,255,0); }
+  60%  { background: rgba(255,255,255,0); }
+  60.3%{ background: rgba(255,255,255,0.22); }
+  60.5%{ background: rgba(255,255,255,0); }
+  100% { background: rgba(255,255,255,0); }
+}
+/* Rayon de lumière gauche */
+.flash-ray-l {
+  position: absolute;
+  top: -20%; left: -10%;
+  width: 55%; height: 130%;
+  background: linear-gradient(135deg, rgba(255,240,200,0.22) 0%, transparent 60%);
+  transform-origin: top left;
+  animation: rayL 7s ease-in-out infinite;
+  filter: blur(18px);
+}
+@keyframes rayL {
+  0%,100%{ opacity:0; transform:rotate(-5deg) scaleX(0.8); }
+  20%    { opacity:0; }
+  25%    { opacity:1; transform:rotate(0deg) scaleX(1); }
+  35%    { opacity:0; transform:rotate(3deg) scaleX(1.1); }
+  50%    { opacity:0; }
+}
+/* Rayon de lumière droite */
+.flash-ray-r {
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 55%; height: 130%;
+  background: linear-gradient(225deg, rgba(200,220,255,0.20) 0%, transparent 60%);
+  transform-origin: top right;
+  animation: rayR 9s ease-in-out infinite;
+  filter: blur(18px);
+}
+@keyframes rayR {
+  0%,100%{ opacity:0; transform:rotate(5deg); }
+  55%    { opacity:0; }
+  62%    { opacity:1; transform:rotate(0deg); }
+  72%    { opacity:0; }
+}
+/* Point de lumière centre-bas (style projecteur) */
+.flash-spot {
+  position: absolute;
+  bottom: -30%; left: 50%;
+  transform: translateX(-50%);
+  width: 80%; height: 90%;
+  background: radial-gradient(ellipse 50% 50% at 50% 100%, rgba(255,230,180,0.18) 0%, transparent 70%);
+  animation: spotPulse 11s ease-in-out infinite;
+  filter: blur(8px);
+}
+@keyframes spotPulse {
+  0%,100%{ opacity:0.4; }
+  30%    { opacity:0.9; }
+  50%    { opacity:0.3; }
+  75%    { opacity:0.8; }
+}
+/* Flash rapide secondaire (décalé) */
+.flash-strobe {
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0);
+  animation: flashStrobe 13s infinite 3s;
+}
+@keyframes flashStrobe {
+  0%   { background: rgba(255,255,255,0); }
+  10%  { background: rgba(255,255,255,0.14); }
+  10.2%{ background: rgba(255,255,255,0); }
+  10.5%{ background: rgba(255,255,255,0.08); }
+  10.7%{ background: rgba(255,255,255,0); }
+  80%  { background: rgba(255,255,255,0); }
+  80.2%{ background: rgba(255,255,255,0.16); }
+  80.4%{ background: rgba(255,255,255,0); }
+  100% { background: rgba(255,255,255,0); }
+}
+
 .hero-bg {
   position: absolute; inset: 0;
   background:
@@ -688,6 +780,13 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   <video class="hero-video" autoplay muted loop playsinline preload="auto" oncanplay="this.classList.add('loaded')">
     <source src="hero-bg.mp4" type="video/mp4">
   </video>
+  <div class="hero-flashes" aria-hidden="true">
+    <div class="flash-global"></div>
+    <div class="flash-strobe"></div>
+    <div class="flash-ray-l"></div>
+    <div class="flash-ray-r"></div>
+    <div class="flash-spot"></div>
+  </div>
   <div class="hero-bg"></div>
   <div class="hero-svg-wrap" aria-hidden="true">
   <svg viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
