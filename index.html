@@ -161,7 +161,7 @@ body::before {
 }
 .hero-video.loaded { opacity: 1; }
 
-/* ── Effet boîte de nuit : couche noire qui pulse sur la vidéo ── */
+/* ── Effet cinématographique : faisceaux volumétriques + fondu au noir ── */
 .hero-flashes {
   position: absolute; inset: 0;
   z-index: 1;
@@ -169,64 +169,101 @@ body::before {
   overflow: hidden;
 }
 
-/* Couche noire — s'allume et s'éteint doucement */
-.flash-strobe {
+/* Faisceau 1 — rayon principal depuis le haut-gauche */
+.flash-spot-main {
   position: absolute; inset: 0;
-  background: #000;
+  background:
+    conic-gradient(
+      from -8deg at 28% -10%,
+      transparent 0deg,
+      rgba(255,230,180,0.18) 6deg,
+      rgba(255,220,160,0.10) 10deg,
+      transparent 14deg
+    );
+  filter: blur(14px);
   opacity: 0;
-  animation: clubDark 5s ease-in-out infinite;
+  transform-origin: 28% 0%;
+  animation: beam1Sweep 18s ease-in-out infinite;
 }
-@keyframes clubDark {
+@keyframes beam1Sweep {
+  0%   { opacity: 0; transform: rotate(0deg); }
+  8%   { opacity: 1; transform: rotate(0deg); }
+  45%  { opacity: 0.85; transform: rotate(6deg); }
+  70%  { opacity: 0; transform: rotate(10deg); }
+  100% { opacity: 0; transform: rotate(10deg); }
+}
+
+/* Faisceau 2 — rayon depuis le haut-droit, décalé */
+.flash-spot-2 {
+  position: absolute; inset: 0;
+  background:
+    conic-gradient(
+      from 188deg at 72% -8%,
+      transparent 0deg,
+      rgba(200,210,255,0.15) 5deg,
+      rgba(180,200,255,0.08) 9deg,
+      transparent 13deg
+    );
+  filter: blur(18px);
+  opacity: 0;
+  transform-origin: 72% 0%;
+  animation: beam2Sweep 22s ease-in-out infinite 6s;
+}
+@keyframes beam2Sweep {
+  0%   { opacity: 0; transform: rotate(0deg); }
+  10%  { opacity: 0.9; transform: rotate(0deg); }
+  50%  { opacity: 0.75; transform: rotate(-8deg); }
+  75%  { opacity: 0; transform: rotate(-13deg); }
+  100% { opacity: 0; transform: rotate(-13deg); }
+}
+
+/* Faisceau 3 — halo central diffus */
+.flash-spot-crowd {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 35% 65% at 50% 0%, rgba(255,240,200,0.12) 0%, transparent 70%);
+  filter: blur(30px);
+  opacity: 0;
+  animation: beam3Pulse 14s ease-in-out infinite 11s;
+}
+@keyframes beam3Pulse {
   0%   { opacity: 0; }
-  30%  { opacity: 0.55; }
-  55%  { opacity: 0.55; }
+  15%  { opacity: 1; }
+  60%  { opacity: 0.6; }
   85%  { opacity: 0; }
   100% { opacity: 0; }
 }
 
-/* Deuxième couche décalée */
+/* Fondu au noir périodique — doux et cinématographique */
+.flash-strobe {
+  position: absolute; inset: 0;
+  background: #000;
+  opacity: 0;
+  animation: fadeToBlack 20s ease-in-out infinite 3s;
+}
+@keyframes fadeToBlack {
+  0%   { opacity: 0; }
+  18%  { opacity: 0; }
+  28%  { opacity: 0.88; }
+  52%  { opacity: 0.88; }
+  65%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Deuxième fondu — cycle décalé */
 .flash-strobe2 {
   position: absolute; inset: 0;
   background: #000;
   opacity: 0;
-  animation: clubDark2 7s ease-in-out infinite 2.5s;
+  animation: fadeToBlack2 26s ease-in-out infinite 14s;
 }
-@keyframes clubDark2 {
+@keyframes fadeToBlack2 {
   0%   { opacity: 0; }
-  25%  { opacity: 0.45; }
-  50%  { opacity: 0.45; }
-  80%  { opacity: 0; }
+  15%  { opacity: 0; }
+  25%  { opacity: 0.82; }
+  48%  { opacity: 0.82; }
+  60%  { opacity: 0; }
   100% { opacity: 0; }
-}
-
-/* Flash blanc très bref et rare — l'éclair de stroboscope */
-.flash-spot-main {
-  position: absolute; inset: 0;
-  background: #fff;
-  opacity: 0;
-  animation: clubFlash 9s steps(1) infinite 1s;
-}
-@keyframes clubFlash {
-  0%      { opacity: 0; }
-  22%     { opacity: 0.85; }
-  22.08%  { opacity: 0; }
-  22.18%  { opacity: 0.70; }
-  22.26%  { opacity: 0; }
-  100%    { opacity: 0; }
-}
-
-/* Flash blanc 2 — cycle différent */
-.flash-spot-2 {
-  position: absolute; inset: 0;
-  background: #fff;
-  opacity: 0;
-  animation: clubFlash2 11s steps(1) infinite 5s;
-}
-@keyframes clubFlash2 {
-  0%      { opacity: 0; }
-  18%     { opacity: 0.80; }
-  18.07%  { opacity: 0; }
-  100%    { opacity: 0; }
 }
 
 /* Élément vide requis */
