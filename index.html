@@ -161,10 +161,76 @@ body::before {
 }
 .hero-video.loaded { opacity: 1; }
 
-/* ── Pas d'effets flash — vidéo brute ── */
+/* ── Effet boîte de nuit : couche noire qui pulse sur la vidéo ── */
 .hero-flashes {
-  display: none;
+  position: absolute; inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
 }
+
+/* Couche noire principale — s'allume et s'éteint lentement */
+.flash-strobe {
+  position: absolute; inset: 0;
+  background: #000;
+  opacity: 0;
+  animation: clubDark 5s ease-in-out infinite;
+}
+@keyframes clubDark {
+  0%   { opacity: 0; }       /* vidéo visible */
+  25%  { opacity: 0.92; }    /* noir quasi total */
+  55%  { opacity: 0.92; }    /* reste noir */
+  80%  { opacity: 0; }       /* vidéo revient */
+  100% { opacity: 0; }
+}
+
+/* Deuxième couche décalée — rythme irrégulier */
+.flash-strobe2 {
+  position: absolute; inset: 0;
+  background: #000;
+  opacity: 0;
+  animation: clubDark2 7s ease-in-out infinite 2.5s;
+}
+@keyframes clubDark2 {
+  0%   { opacity: 0; }
+  20%  { opacity: 0.88; }
+  50%  { opacity: 0.88; }
+  75%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Flash blanc très bref et rare — l'éclair de stroboscope */
+.flash-spot-main {
+  position: absolute; inset: 0;
+  background: #fff;
+  opacity: 0;
+  animation: clubFlash 9s steps(1) infinite 1s;
+}
+@keyframes clubFlash {
+  0%      { opacity: 0; }
+  22%     { opacity: 0.85; }
+  22.08%  { opacity: 0; }
+  22.18%  { opacity: 0.70; }
+  22.26%  { opacity: 0; }
+  100%    { opacity: 0; }
+}
+
+/* Flash blanc 2 — cycle différent */
+.flash-spot-2 {
+  position: absolute; inset: 0;
+  background: #fff;
+  opacity: 0;
+  animation: clubFlash2 11s steps(1) infinite 5s;
+}
+@keyframes clubFlash2 {
+  0%      { opacity: 0; }
+  18%     { opacity: 0.80; }
+  18.07%  { opacity: 0; }
+  100%    { opacity: 0; }
+}
+
+/* Élément vide requis */
+.flash-spot-crowd { display: none; }
 
 .hero-bg {
   position: absolute; inset: 0;
