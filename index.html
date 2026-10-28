@@ -161,7 +161,7 @@ body::before {
 }
 .hero-video.loaded { opacity: 1; }
 
-/* ── Stroboscope concert noir/blanc ── */
+/* ── Stroboscope concert noir/blanc brutal ── */
 .hero-flashes {
   position: absolute; inset: 0;
   z-index: 1;
@@ -169,89 +169,89 @@ body::before {
   overflow: hidden;
 }
 
-/* Strobe principal — blanc pur éclatant */
+/*
+  Principe : couche noire permanente à ~0.65 → vidéo très sombre
+  Puis des flashes blancs quasi-opaques qui percent brutalement
+  Rythme lent (~2-4s entre chaque), comme un vrai stroboscope de salle
+*/
+
+/* Assombrissement permanent de la vidéo pour accentuer le contraste */
+.flash-spot-crowd {
+  position: absolute; inset: 0;
+  background: #000;
+  opacity: 0.55;
+}
+
+/* Flash blanc principal — lent, brutal, quasi total */
 .flash-strobe {
   position: absolute; inset: 0;
   background: #fff;
   opacity: 0;
-  animation: strobeA 3s steps(1) infinite;
+  animation: strobeMain 4s steps(1) infinite;
 }
-@keyframes strobeA {
-  0%     { opacity: 0; }
-  3%     { opacity: 0.95; }
-  3.08%  { opacity: 0; }
-  3.16%  { opacity: 0.85; }
-  3.24%  { opacity: 0; }
-  3.32%  { opacity: 0.70; }
-  3.4%   { opacity: 0; }
-  100%   { opacity: 0; }
+@keyframes strobeMain {
+  0%      { opacity: 0; }
+  /* premier flash */
+  5%      { opacity: 0.92; }
+  5.12%   { opacity: 0; }
+  5.25%   { opacity: 0.78; }
+  5.37%   { opacity: 0; }
+  /* silence */
+  100%    { opacity: 0; }
 }
 
-/* Strobe 2 — décalé, rythme différent */
+/* Flash blanc 2 — décalé de 1.8s, même intensité */
 .flash-strobe2 {
   position: absolute; inset: 0;
   background: #fff;
   opacity: 0;
-  animation: strobeB 2.3s steps(1) infinite 0.9s;
+  animation: strobeMain2 4s steps(1) infinite 1.8s;
 }
-@keyframes strobeB {
-  0%     { opacity: 0; }
-  4%     { opacity: 1; }
-  4.1%   { opacity: 0; }
-  4.25%  { opacity: 0.80; }
-  4.35%  { opacity: 0; }
-  100%   { opacity: 0; }
+@keyframes strobeMain2 {
+  0%      { opacity: 0; }
+  5%      { opacity: 0.95; }
+  5.12%   { opacity: 0; }
+  5.3%    { opacity: 0.80; }
+  5.42%   { opacity: 0; }
+  5.6%    { opacity: 0.65; }
+  5.72%   { opacity: 0; }
+  100%    { opacity: 0; }
 }
 
-/* Strobe 3 — plus lent, plus long, pour l'effet "noir" entre les flashes */
+/* Flash blanc 3 — cycle différent (6s), triple frappe */
 .flash-spot-main {
   position: absolute; inset: 0;
   background: #fff;
   opacity: 0;
-  animation: strobeC 5s steps(1) infinite 1.7s;
+  animation: strobeMain3 6s steps(1) infinite 3.2s;
 }
-@keyframes strobeC {
-  0%     { opacity: 0; }
-  2%     { opacity: 0.90; }
-  2.06%  { opacity: 0; }
-  2.14%  { opacity: 0.75; }
-  2.2%   { opacity: 0; }
-  2.3%   { opacity: 0.90; }
-  2.36%  { opacity: 0; }
-  2.5%   { opacity: 0.60; }
-  2.56%  { opacity: 0; }
-  100%   { opacity: 0; }
+@keyframes strobeMain3 {
+  0%      { opacity: 0; }
+  3%      { opacity: 0.88; }
+  3.1%    { opacity: 0; }
+  3.22%   { opacity: 0.72; }
+  3.32%   { opacity: 0; }
+  3.45%   { opacity: 0.88; }
+  3.55%   { opacity: 0; }
+  100%    { opacity: 0; }
 }
 
-/* Flash noir — assombrit entre les blancs pour accentuer le contraste */
+/* Couche noire qui pulse — renforce le "noir" avant/après chaque flash */
 .flash-spot-2 {
   position: absolute; inset: 0;
   background: #000;
   opacity: 0;
-  animation: strobeNoir 3s steps(1) infinite 0.4s;
+  animation: darkPulse 4s steps(1) infinite 0.5s;
 }
-@keyframes strobeNoir {
-  0%    { opacity: 0; }
-  6%    { opacity: 0.55; }
-  6.3%  { opacity: 0; }
-  50%   { opacity: 0; }
-  56%   { opacity: 0.45; }
-  56.3% { opacity: 0; }
-  100%  { opacity: 0; }
-}
-
-/* Flash noir 2 — rythme décalé */
-.flash-spot-crowd {
-  position: absolute; inset: 0;
-  background: #000;
-  opacity: 0;
-  animation: strobeNoir2 4.5s steps(1) infinite 2.1s;
-}
-@keyframes strobeNoir2 {
-  0%    { opacity: 0; }
-  5%    { opacity: 0.60; }
-  5.25% { opacity: 0; }
-  100%  { opacity: 0; }
+@keyframes darkPulse {
+  0%      { opacity: 0; }
+  /* s'assombrit juste avant le flash pour plus de contraste */
+  4.5%    { opacity: 0.40; }
+  4.9%    { opacity: 0; }
+  /* et juste après */
+  5.5%    { opacity: 0.35; }
+  5.8%    { opacity: 0; }
+  100%    { opacity: 0; }
 }
 
 .hero-bg {
