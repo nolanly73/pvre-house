@@ -169,7 +169,7 @@ body::before {
   overflow: hidden;
 }
 
-/* Couche noire principale — s'allume et s'éteint lentement */
+/* Couche noire — s'allume et s'éteint doucement */
 .flash-strobe {
   position: absolute; inset: 0;
   background: #000;
@@ -177,14 +177,14 @@ body::before {
   animation: clubDark 5s ease-in-out infinite;
 }
 @keyframes clubDark {
-  0%   { opacity: 0; }       /* vidéo visible */
-  25%  { opacity: 0.92; }    /* noir quasi total */
-  55%  { opacity: 0.92; }    /* reste noir */
-  80%  { opacity: 0; }       /* vidéo revient */
+  0%   { opacity: 0; }
+  30%  { opacity: 0.55; }
+  55%  { opacity: 0.55; }
+  85%  { opacity: 0; }
   100% { opacity: 0; }
 }
 
-/* Deuxième couche décalée — rythme irrégulier */
+/* Deuxième couche décalée */
 .flash-strobe2 {
   position: absolute; inset: 0;
   background: #000;
@@ -193,9 +193,9 @@ body::before {
 }
 @keyframes clubDark2 {
   0%   { opacity: 0; }
-  20%  { opacity: 0.88; }
-  50%  { opacity: 0.88; }
-  75%  { opacity: 0; }
+  25%  { opacity: 0.45; }
+  50%  { opacity: 0.45; }
+  80%  { opacity: 0; }
   100% { opacity: 0; }
 }
 
