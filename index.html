@@ -665,12 +665,24 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   .section-title { font-size: 2rem; }
 }
 
+/* ─── MOBILE NAV LANG BAR ─── */
+.nav-lang-mobile {
+  display: flex;
+  gap: 2px;
+  margin-right: 8px;
+}
+.nav-lang-mobile .lang-btn {
+  padding: 4px 8px;
+  font-size: 0.58rem;
+}
+
 /* ─── DESKTOP: show nav elements, hide hamburger ─── */
 @media (min-width: 1025px) {
   .lang-bar { display: flex; }
   .nav-cta { display: block; }
   .nav-links { display: flex; }
   .nav-hamburger { display: none; }
+  .nav-lang-mobile { display: none; }
 }
 
 @media (max-width: 600px) {
@@ -721,6 +733,12 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
     <span data-lang="th">ติดต่อเรา</span>
     <span data-lang="lo">ຕິດຕໍ່ພວກເຮົາ</span><span data-lang="zh">联系我们</span>
   </a>
+  <div class="nav-lang-mobile">
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('th')">TH</button>
+    <button class="lang-btn" onclick="setLang('lo')">ລາວ</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  </div>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
