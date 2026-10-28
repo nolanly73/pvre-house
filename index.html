@@ -170,88 +170,77 @@ body::before {
 }
 
 /*
-  Principe : couche noire permanente à ~0.65 → vidéo très sombre
-  Puis des flashes blancs quasi-opaques qui percent brutalement
-  Rythme lent (~2-4s entre chaque), comme un vrai stroboscope de salle
+  Le noir domine. La vidéo reste sombre la plupart du temps.
+  Un seul flash blanc rare, bref, puis retour au noir.
+  Rythme : ~7s de noir → 1 flash blanc → retour noir
 */
 
-/* Assombrissement permanent de la vidéo pour accentuer le contraste */
+/* Noir dominant permanent */
 .flash-spot-crowd {
   position: absolute; inset: 0;
   background: #000;
-  opacity: 0.55;
+  opacity: 0.62;
 }
 
-/* Flash blanc principal — lent, brutal, quasi total */
-.flash-strobe {
-  position: absolute; inset: 0;
-  background: #fff;
-  opacity: 0;
-  animation: strobeMain 4s steps(1) infinite;
-}
-@keyframes strobeMain {
-  0%      { opacity: 0; }
-  /* premier flash */
-  5%      { opacity: 0.92; }
-  5.12%   { opacity: 0; }
-  5.25%   { opacity: 0.78; }
-  5.37%   { opacity: 0; }
-  /* silence */
-  100%    { opacity: 0; }
-}
-
-/* Flash blanc 2 — décalé de 1.8s, même intensité */
-.flash-strobe2 {
-  position: absolute; inset: 0;
-  background: #fff;
-  opacity: 0;
-  animation: strobeMain2 4s steps(1) infinite 1.8s;
-}
-@keyframes strobeMain2 {
-  0%      { opacity: 0; }
-  5%      { opacity: 0.95; }
-  5.12%   { opacity: 0; }
-  5.3%    { opacity: 0.80; }
-  5.42%   { opacity: 0; }
-  5.6%    { opacity: 0.65; }
-  5.72%   { opacity: 0; }
-  100%    { opacity: 0; }
-}
-
-/* Flash blanc 3 — cycle différent (6s), triple frappe */
-.flash-spot-main {
-  position: absolute; inset: 0;
-  background: #fff;
-  opacity: 0;
-  animation: strobeMain3 6s steps(1) infinite 3.2s;
-}
-@keyframes strobeMain3 {
-  0%      { opacity: 0; }
-  3%      { opacity: 0.88; }
-  3.1%    { opacity: 0; }
-  3.22%   { opacity: 0.72; }
-  3.32%   { opacity: 0; }
-  3.45%   { opacity: 0.88; }
-  3.55%   { opacity: 0; }
-  100%    { opacity: 0; }
-}
-
-/* Couche noire qui pulse — renforce le "noir" avant/après chaque flash */
+/* Noir qui s'intensifie entre les flashs */
 .flash-spot-2 {
   position: absolute; inset: 0;
   background: #000;
   opacity: 0;
-  animation: darkPulse 4s steps(1) infinite 0.5s;
+  animation: darkWave 7s ease-in-out infinite;
 }
-@keyframes darkPulse {
-  0%      { opacity: 0; }
-  /* s'assombrit juste avant le flash pour plus de contraste */
-  4.5%    { opacity: 0.40; }
-  4.9%    { opacity: 0; }
-  /* et juste après */
-  5.5%    { opacity: 0.35; }
-  5.8%    { opacity: 0; }
-  100%    { opacity: 0; }
+@keyframes darkWave {
+  0%   { opacity: 0; }
+  30%  { opacity: 0.30; }
+  60%  { opacity: 0.20; }
+  85%  { opacity: 0.35; }
+  100% { opacity: 0; }
+}
+
+/* UN seul flash blanc, rare, 1 fois toutes les 7s */
+.flash-strobe {
+  position: absolute; inset: 0;
+  background: #fff;
+  opacity: 0;
+  animation: strobeUnique 7s steps(1) infinite;
+}
+@keyframes strobeUnique {
+  0%     { opacity: 0; }
+  88%    { opacity: 0.85; }
+  88.1%  { opacity: 0; }
+  88.25% { opacity: 0.65; }
+  88.35% { opacity: 0; }
+  100%   { opacity: 0; }
+}
+
+/* Second flash, décalé de 3.5s — pour casser la régularité */
+.flash-strobe2 {
+  position: absolute; inset: 0;
+  background: #fff;
+  opacity: 0;
+  animation: strobeUnique2 9s steps(1) infinite 3.5s;
+}
+@keyframes strobeUnique2 {
+  0%     { opacity: 0; }
+  78%    { opacity: 0.80; }
+  78.1%  { opacity: 0; }
+  100%   { opacity: 0; }
+}
+
+/* Troisième flash encore plus rare */
+.flash-spot-main {
+  position: absolute; inset: 0;
+  background: #fff;
+  opacity: 0;
+  animation: strobeRare 11s steps(1) infinite 6s;
+}
+@keyframes strobeRare {
+  0%     { opacity: 0; }
+  72%    { opacity: 0.75; }
+  72.08% { opacity: 0; }
+  72.18% { opacity: 0.55; }
+  72.26% { opacity: 0; }
+  100%   { opacity: 0; }
 }
 
 .hero-bg {
