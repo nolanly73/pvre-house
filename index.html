@@ -61,11 +61,13 @@ body {
 [data-lang] { display: none; }
 body.lang-en [data-lang="en"],
 body.lang-th [data-lang="th"],
-body.lang-lo [data-lang="lo"] { display: block; }
+body.lang-lo [data-lang="lo"],
+body.lang-zh [data-lang="zh"] { display: block; }
 span[data-lang] { display: none; }
 body.lang-en span[data-lang="en"],
 body.lang-th span[data-lang="th"],
-body.lang-lo span[data-lang="lo"] { display: inline; }
+body.lang-lo span[data-lang="lo"],
+body.lang-zh span[data-lang="zh"] { display: inline; }
 
 /* ─── NAV ─── */
 nav {
@@ -702,21 +704,22 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   <button class="lang-btn active" onclick="setLang('en')">EN</button>
   <button class="lang-btn" onclick="setLang('th')">TH</button>
   <button class="lang-btn" onclick="setLang('lo')">ລາວ</button>
+  <button class="lang-btn" onclick="setLang('zh')">中文</button>
 </div>
 
 <!-- ─── NAV ─── -->
 <nav>
   <a href="#" class="nav-logo-img" style="display:flex;align-items:center;"><img src="data:image/png;base64,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XMOc175kydLw6KOP9SQK/fWv1QED0BoBMAAUOHbsaE42t/2a32xtb9J+//3LQl7Nb5JpbffS56wzZ04VZKTzMrkVnbT/4Ac/7Mml0Ldv31IHDEBLBMAAUOD48dfqaoHza37zsqN5dbRJe1TQXnX69PwufU67cWMmOnv29Fx/8meBbq/mt9JeXOO8YcMPO+53u8wEDUCrBMAA0MDGjY+2VB/7z//cvTV2T516I5w6daKj7G/izTdPR/PpQ9F4mo3zi19cEu67b3GzwJ98civ65JNbi/mUAAwoATAANHD16pXo6tUrsz8Vz4Scv55u1OY6u12Jees89dSOtvdf6XdU0J6/fbL/F144vCDjaEQdMACtEAADQBOvv34sdKPmN91etD7v6dMnupb9Tdy4MRPduDHTcc1vUe1w0p4e8w9+8MNFzgLfXphPDwAYKgJgAGji6tUr0bVrV2d/ai+LWlwLnN/W7eA3cfbsmdnnaXf3ResgF42n8sMPfvBouO++JaamAqCvCIABoAXHjx9tsn5u52vqnjrV+cRXRW7enInOnj2TytrmZXLbWS+4+fbf//6jvT5tAFBDAAwALbh27WoqCxzarPktrh1OzMxcD6dPL0z2N/HWW2ca7r+dmt/G46q4774l4fvff1QWGIC+IQAGgBY1qwXOq/lNr8ObV/ObtF+/fn1RxvD00zu7UvPbak309763odenDQDmCIABoEXZLHBWXs1v81mgo3D69MkFz/4mbt68Ed28eaNhf2rHUzTO2u0bjfH551+UBQagLwiAAaANb7xxvGvr/aZqfxd1BuO3336z62No9HXvvfeFL37xPkEwAD0nAAaANlSzwFFIan7rRQVttdnVKArh9OmTiz6GmzdvRLdu3QzFM1Q373/eeOszw9WaaJdCA9APBMAA0KYTJ17P1MXWz4rcrOY3jkM4derEol36nPXMM7ujvBre7Hq+rax33EpN9L333he+970NssAA9JQAGADadO3a1Whm5lrOPVFoZ5ndmZnFmfiqyI9/fLba86jx+sTzkX3sd7/7g56OFwAEwAAwD2+8cTzkZX7rM6j5a+SePn0izMxc70n2N/H222ejmzdvNq3hrc/wzn+944MHx2WBAegZATAAzMP169ei69eTLHDrNb8hhDAzMxNOnz7Z0+A3ce7c2Zb6n72vPmMchUbrICdtJsQCoJcE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" alt="PVRE Entertainment Group" style="height:80px;width:auto;object-fit:contain;"></a>
   <ul class="nav-links">
-    <li><a href="#services"><span data-lang="en">Services</span><span data-lang="th">บริการ</span><span data-lang="lo">ບໍລິການ</span></a></li>
-    <li><a href="#artist"><span data-lang="en">Artist</span><span data-lang="th">ศิลปิน</span><span data-lang="lo">ສິລະປິນ</span></a></li>
+    <li><a href="#services"><span data-lang="en">Services</span><span data-lang="th">บริการ</span><span data-lang="lo">ບໍລິການ</span><span data-lang="zh">服务</span></a></li>
+    <li><a href="#artist"><span data-lang="en">Artist</span><span data-lang="th">ศิลปิน</span><span data-lang="lo">ສິລະປິນ</span><span data-lang="zh">艺人</span></a></li>
     <li><a href="#dj">PVRE DJ</a></li>
-    <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="th">ติดต่อ</span><span data-lang="lo">ຕິດຕໍ່</span></a></li>
+    <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="th">ติดต่อ</span><span data-lang="lo">ຕິດຕໍ່</span><span data-lang="zh">联系</span></a></li>
   </ul>
   <a href="#contact" class="nav-cta">
     <span data-lang="en">Contact Us</span>
     <span data-lang="th">ติดต่อเรา</span>
-    <span data-lang="lo">ຕິດຕໍ່ພວກເຮົາ</span>
+    <span data-lang="lo">ຕິດຕໍ່ພວກເຮົາ</span><span data-lang="zh">联系我们</span>
   </a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -724,14 +727,15 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#services" onclick="closeMobileMenu()"><span data-lang="en">Services</span><span data-lang="th">บริการ</span><span data-lang="lo">ບໍລິການ</span></a>
-  <a href="#artist" onclick="closeMobileMenu()"><span data-lang="en">Artist</span><span data-lang="th">ศิลปิน</span><span data-lang="lo">ສິລະປິນ</span></a>
+  <a href="#services" onclick="closeMobileMenu()"><span data-lang="en">Services</span><span data-lang="th">บริการ</span><span data-lang="lo">ບໍລິການ</span><span data-lang="zh">服务</span></a>
+  <a href="#artist" onclick="closeMobileMenu()"><span data-lang="en">Artist</span><span data-lang="th">ศิลปิน</span><span data-lang="lo">ສິລະປິນ</span><span data-lang="zh">艺人</span></a>
   <a href="#dj" onclick="closeMobileMenu()">PVRE DJ</a>
-  <a href="#contact" onclick="closeMobileMenu()" class="mobile-cta"><span data-lang="en">Contact Us</span><span data-lang="th">ติดต่อเรา</span><span data-lang="lo">ຕິດຕໍ່ພວກເຮົາ</span></a>
+  <a href="#contact" onclick="closeMobileMenu()" class="mobile-cta"><span data-lang="en">Contact Us</span><span data-lang="th">ติดต่อเรา</span><span data-lang="lo">ຕິດຕໍ່ພວກເຮົາ</span><span data-lang="zh">联系我们</span></a>
   <div class="mobile-lang">
     <button onclick="setLang('en');closeMobileMenu()">EN</button>
     <button onclick="setLang('th');closeMobileMenu()">TH</button>
     <button onclick="setLang('lo');closeMobileMenu()">LO</button>
+    <button onclick="setLang('zh');closeMobileMenu()">中文</button>
   </div>
 </div>
 
@@ -805,6 +809,14 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
         <a href="#contact" class="btn-ghost">ຮ່ວມງານກັບພວກເຮົາ</a>
       </div>
     </div>
+    <div data-lang="zh" class="hero-tagline-wrap">
+      <p class="hero-tagline">东南亚的<br><em>音乐声音</em></p>
+      <p class="hero-sub">万象 · 全球 · 泰国</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">了解服务</a>
+        <a href="#contact" class="btn-ghost">合作洽谈</a>
+      </div>
+    </div>
   </div>
 
   <div class="scroll-hint"><div class="scroll-line"></div>Scroll</div>
@@ -817,17 +829,17 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   <div class="inner">
     <div class="services-header">
       <div>
-        <p class="section-label"><span data-lang="en">What We Do</span><span data-lang="th">สิ่งที่เราทำ</span><span data-lang="lo">ສິ່ງທີ່ພວກເຮົາເຮັດ</span></p>
+        <p class="section-label"><span data-lang="en">What We Do</span><span data-lang="th">สิ่งที่เราทำ</span><span data-lang="lo">ສິ່ງທີ່ພວກເຮົາເຮັດ</span><span data-lang="zh">我们的业务</span></p>
         <h2 class="section-title">
           <span data-lang="en">Three pillars,<br><em>one vision</em></span>
           <span data-lang="th">สามเสาหลัก,<br><em>วิสัยทัศน์เดียว</em></span>
-          <span data-lang="lo">ສາມເສົາຫຼັກ,<br><em>ວິໄສທັດດຽວ</em></span>
+          <span data-lang="lo">ສາມເສົາຫຼັກ,<br><em>ວິໄສທັດດຽວ</em></span><span data-lang="zh">三大支柱，一个愿景</span>
         </h2>
       </div>
       <p class="services-intro">
         <span data-lang="en">PVRE HOUSE works on three complementary axes: bringing the world's best DJs to Laos, representing Lao talents in Thailand, and developing Lao artists &amp; influencers locally within Laos.</span>
         <span data-lang="th">PVRE HOUSE ทำงานบนสามแกนหลัก: นำ DJ ระดับโลกมาแสดงในลาว ตัวแทนศิลปินลาวในไทย และพัฒนาศิลปินและอินฟลูเอนเซอร์ลาวภายในประเทศ</span>
-        <span data-lang="lo">PVRE HOUSE ເຮັດວຽກໃນສາມທິດທາງ: ນຳ DJ ລະດັບໂລກມາລາວ ຕາງໜ້າສິລະປິນລາວໃນໄທ ແລະ ພັດທະນາສິລະປິນ ແລະ ອິນຟລູເອນເຊີລາວພາຍໃນ</span>
+        <span data-lang="lo">PVRE HOUSE ເຮັດວຽກໃນສາມທິດທາງ: ນຳ DJ ລະດັບໂລກມາລາວ ຕາງໜ້າສິລະປິນລາວໃນໄທ ແລະ ພັດທະນາສິລະປິນ ແລະ ອິນຟລູເອນເຊີລາວພາຍໃນ</span><span data-lang="zh">PVRE HOUSE 围绕三个互补轴运营：将全球最优秀的 DJ 带到老挝，代理老挝艺人进军泰国市场，以及在老挝本地发展和培育本土艺人及网红。</span>
       </p>
     </div>
 
@@ -842,15 +854,15 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
             <path d="M36 14l6 4-6 4" stroke-width="2"/>
           </svg>
         </div>
-        <h3 class="service-name"><span data-lang="en">Lao Artists → Thailand</span><span data-lang="th">ศิลปินลาว → ไทย</span><span data-lang="lo">ສິລະປິນລາວ → ໄທ</span></h3>
+        <h3 class="service-name"><span data-lang="en">Lao Artists → Thailand</span><span data-lang="th">ศิลปินลาว → ไทย</span><span data-lang="lo">ສິລະປິນລາວ → ໄທ</span><span data-lang="zh">老挝艺人 → 泰国</span></h3>
         <p class="service-desc">
           <span data-lang="en">We represent Lao artists, singers &amp; influencers in the Thai market — concerts, brand deals, advertising campaigns and international career development.</span>
           <span data-lang="th">เราเป็นตัวแทนศิลปิน นักร้อง และอินฟลูเอนเซอร์ลาวในตลาดไทย ทั้งคอนเสิร์ต ดีลแบรนด์ โฆษณา และการพัฒนาอาชีพ</span>
-          <span data-lang="lo">ພວກເຮົາຕາງໜ້າສິລະປິນ ນັກຮ້ອງ ແລະ ອິນຟລູເອນເຊີລາວໃນຕະຫຼາດໄທ — ຄອນເສີດ ດີລແບຣນດ໌ ໂຄສະນາ ແລະ ການພັດທະນາອາຊີບ</span>
+          <span data-lang="lo">ພວກເຮົາຕາງໜ້າສິລະປິນ ນັກຮ້ອງ ແລະ ອິນຟລູເອນເຊີລາວໃນຕະຫຼາດໄທ — ຄອນເສີດ ດີລແບຣນດ໌ ໂຄສະນາ ແລະ ການພັດທະນາອາຊີບ</span><span data-lang="zh">我们代理老挝歌手、艺人及网红进入泰国市场——演出、品牌合作、广告活动及国际职业发展。</span>
         </p>
         <div class="service-tags">
-          <span class="tag"><span data-lang="en">Singers</span><span data-lang="th">นักร้อง</span><span data-lang="lo">ນັກຮ້ອງ</span></span>
-          <span class="tag"><span data-lang="en">Influencers</span><span data-lang="th">อินฟลูเอนเซอร์</span><span data-lang="lo">ອິນຟລູ</span></span>
+          <span class="tag"><span data-lang="en">Singers</span><span data-lang="th">นักร้อง</span><span data-lang="lo">ນັກຮ້ອງ</span><span data-lang="zh">歌手</span></span>
+          <span class="tag"><span data-lang="en">Influencers</span><span data-lang="th">อินฟลูเอนเซอร์</span><span data-lang="lo">ອິນຟລູ</span><span data-lang="zh">网红</span></span>
           <span class="tag">Thailand</span>
         </div>
       </div>
@@ -865,16 +877,16 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
             <circle cx="24" cy="16" r="3" fill="currentColor" stroke="none"/>
           </svg>
         </div>
-        <h3 class="service-name"><span data-lang="en">Lao Artists — Local Scene</span><span data-lang="th">ศิลปินลาว — ตลาดลาว</span><span data-lang="lo">ສິລະປິນລາວ — ທ້ອງຖິ່ນ</span></h3>
+        <h3 class="service-name"><span data-lang="en">Lao Artists — Local Scene</span><span data-lang="th">ศิลปินลาว — ตลาดลาว</span><span data-lang="lo">ສິລະປິນລາວ — ທ້ອງຖິ່ນ</span><span data-lang="zh">老挝艺人 — 本地演出</span></h3>
         <p class="service-desc">
           <span data-lang="en">We also develop and manage Lao artists &amp; influencers locally in Laos — local brand partnerships, events, content creation and audience growth.</span>
           <span data-lang="th">เรายังพัฒนาและบริหารศิลปินและอินฟลูเอนเซอร์ลาวภายในลาว — พาร์ทเนอร์แบรนด์ท้องถิ่น อีเวนต์ และการสร้างคอนเทนต์</span>
-          <span data-lang="lo">ພວກເຮົາຍັງພັດທະນາ ແລະ ຈັດການສິລະປິນ ແລະ ອິນຟລູເອນເຊີລາວພາຍໃນລາວ — ແບຣນດ໌ທ້ອງຖິ່ນ ງານ ແລະ ການສ້າງເນື້ອຫາ</span>
+          <span data-lang="lo">ພວກເຮົາຍັງພັດທະນາ ແລະ ຈັດການສິລະປິນ ແລະ ອິນຟລູເອນເຊີລາວພາຍໃນລາວ — ແບຣນດ໌ທ້ອງຖິ່ນ ງານ ແລະ ການສ້າງເນື້ອຫາ</span><span data-lang="zh">我们同样在老挝本地开发和管理老挝艺人及网红——本地品牌合作、活动策划、内容创作及粉丝增长。</span>
         </p>
         <div class="service-tags">
           <span class="tag">Laos</span>
-          <span class="tag"><span data-lang="en">Brand Deals</span><span data-lang="th">ดีลแบรนด์</span><span data-lang="lo">ດີລແບຣນດ໌</span></span>
-          <span class="tag"><span data-lang="en">Content</span><span data-lang="th">คอนเทนต์</span><span data-lang="lo">ເນື້ອຫາ</span></span>
+          <span class="tag"><span data-lang="en">Brand Deals</span><span data-lang="th">ดีลแบรนด์</span><span data-lang="lo">ດີລແບຣນດ໌</span><span data-lang="zh">品牌合作</span></span>
+          <span class="tag"><span data-lang="en">Content</span><span data-lang="th">คอนเทนต์</span><span data-lang="lo">ເນື້ອຫາ</span><span data-lang="zh">内容创作</span></span>
         </div>
       </div>
 
@@ -889,14 +901,14 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
             <path d="M12 12l2.8 2.8M33.2 33.2L36 36M36 12l-2.8 2.8M14.8 33.2L12 36"/>
           </svg>
         </div>
-        <h3 class="service-name"><span data-lang="en">International DJs → Laos</span><span data-lang="th">DJ นานาชาติ → ลาว</span><span data-lang="lo">DJ ສາກົນ → ລາວ</span></h3>
+        <h3 class="service-name"><span data-lang="en">International DJs → Laos</span><span data-lang="th">DJ นานาชาติ → ลาว</span><span data-lang="lo">DJ ສາກົນ → ລາວ</span><span data-lang="zh">国际 DJ → 老挝</span></h3>
         <p class="service-desc">
           <span data-lang="en">We exclusively book international DJs from around the world to perform in Laos — full logistics, contracts, and technical coordination handled end-to-end.</span>
           <span data-lang="th">เราบุ๊ก DJ นานาชาติจากทั่วโลกมาแสดงในลาว — จัดการโลจิสติกส์ สัญญา และการประสานงานทางเทคนิคครบวงจร</span>
-          <span data-lang="lo">ພວກເຮົາຈອງ DJ ສາກົນຈາກທົ່ວໂລກມາສະແດງໃນລາວ — ຈັດການທຸກຢ່າງຕັ້ງແຕ່ການຂົນສົ່ງ ສັນຍາ ຈົນຮອດດ້ານເຕັກນິກ</span>
+          <span data-lang="lo">ພວກເຮົາຈອງ DJ ສາກົນຈາກທົ່ວໂລກມາສະແດງໃນລາວ — ຈັດການທຸກຢ່າງຕັ້ງແຕ່ການຂົນສົ່ງ ສັນຍາ ຈົນຮອດດ້ານເຕັກນິກ</span><span data-lang="zh">我们独家代理全球各地的国际 DJ 赴老挝演出——提供全程后勤、合同签署及技术协调服务。</span>
         </p>
         <div class="service-tags">
-          <span class="tag"><span data-lang="en">Worldwide</span><span data-lang="th">ทั่วโลก</span><span data-lang="lo">ທົ່ວໂລກ</span></span>
+          <span class="tag"><span data-lang="en">Worldwide</span><span data-lang="th">ทั่วโลก</span><span data-lang="lo">ທົ່ວໂລກ</span><span data-lang="zh">全球覆盖</span></span>
           <span class="tag">House</span>
           <span class="tag">Electronic</span>
         </div>
@@ -928,19 +940,19 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
       </div>
 
       <div class="artist-info fade-up" style="transition-delay:0.15s">
-        <p class="section-label"><span data-lang="en">PVRE Artist</span><span data-lang="th">PVRE Artist</span><span data-lang="lo">PVRE Artist</span></p>
+        <p class="section-label"><span data-lang="en">PVRE Artist</span><span data-lang="th">PVRE Artist</span><span data-lang="lo">PVRE Artist</span><span data-lang="zh">PVRE 艺人</span></p>
         <h2 class="artist-name">Nutdao <em>ນັດດາວ</em></h2>
         <p class="artist-origin">Laos · Thailand · International</p>
 
         <div class="market-pills">
-          <span class="market-pill"><span data-lang="en">🇱🇦 Laos — Local</span><span data-lang="th">🇱🇦 ลาว — ท้องถิ่น</span><span data-lang="lo">🇱🇦 ລາວ — ທ້ອງຖິ່ນ</span></span>
-          <span class="market-pill"><span data-lang="en">🇹🇭 Thailand — PVRE HOUSE</span><span data-lang="th">🇹🇭 ไทย — PVRE HOUSE</span><span data-lang="lo">🇹🇭 ໄທ — PVRE HOUSE</span></span>
+          <span class="market-pill"><span data-lang="en">🇱🇦 Laos — Local</span><span data-lang="th">🇱🇦 ลาว — ท้องถิ่น</span><span data-lang="lo">🇱🇦 ລາວ — ທ້ອງຖິ່ນ</span><span data-lang="zh">🇱🇦 老挝 — 本地</span></span>
+          <span class="market-pill"><span data-lang="en">🇹🇭 Thailand — PVRE HOUSE</span><span data-lang="th">🇹🇭 ไทย — PVRE HOUSE</span><span data-lang="lo">🇹🇭 ໄທ — PVRE HOUSE</span><span data-lang="zh">🇹🇭 泰国 — PVRE HOUSE</span></span>
         </div>
 
         <p class="artist-bio">
           <span data-lang="en">The iconic voice of contemporary Lao music, Nutdao has become one of Southeast Asia's most-listened artists. Her single <strong style="color:var(--rg)">ແພງອ້າຍ (แพงอ้าย)</strong> has accumulated over 300 million YouTube views. PVRE HOUSE represents her both in Laos and in Thailand — concerts, advertising, brand partnerships and media appearances.</span>
           <span data-lang="th">เสียงอันเป็นสัญลักษณ์ของดนตรีลาวร่วมสมัย Nutdao ผงาดเป็นหนึ่งในศิลปินที่มีคนฟังมากที่สุดในอาเซียน เพลง <strong style="color:var(--rg)">ແພງອ້າຍ (แพงอ้าย)</strong> มียอดวิวกว่า 300 ล้านครั้งบน YouTube PVRE HOUSE เป็นตัวแทนเธอทั้งในลาวและในไทย — คอนเสิร์ต โฆษณา และพาร์ทเนอร์แบรนด์</span>
-          <span data-lang="lo">ສຽງສັນຍາລັກຂອງດົນຕີລາວ, Nutdao ໄດ້ກ້າວຂຶ້ນເປັນໜຶ່ງໃນສິລະປິນທີ່ໄດ້ຍິນຫຼາຍທີ່ສຸດໃນອາຊຽນ. ເພງ <strong style="color:var(--rg)">ແພງອ້າຍ</strong> ສະສົມຍອດວິວກວ່າ 300 ລ້ານຄັ້ງໃນ YouTube. PVRE HOUSE ຕາງໜ້າລາວທັງໃນລາວ ແລະ ໃນໄທ — ຄອນເສີດ ໂຄສະນາ ແລະ ການຮ່ວມມືກັບແບຣນດ໌</span>
+          <span data-lang="lo">ສຽງສັນຍາລັກຂອງດົນຕີລາວ, Nutdao ໄດ້ກ້າວຂຶ້ນເປັນໜຶ່ງໃນສິລະປິນທີ່ໄດ້ຍິນຫຼາຍທີ່ສຸດໃນອາຊຽນ. ເພງ <strong style="color:var(--rg)">ແພງອ້າຍ</strong> ສະສົມຍອດວິວກວ່າ 300 ລ້ານຄັ້ງໃນ YouTube. PVRE HOUSE ຕາງໜ້າລາວທັງໃນລາວ ແລະ ໃນໄທ — ຄອນເສີດ ໂຄສະນາ ແລະ ການຮ່ວມມືກັບແບຣນດ໌</span><span data-lang="zh">努达奥是当代老挝音乐的标志性声音，已成为东南亚收听量最高的艺人之一。她的单曲 ແພງອ້າຍ (แพงอ้าย) 在 YouTube 上累计超过 3 亿次播放。PVRE HOUSE 代理她进入泰国市场。</span>
         </p>
 
         <div class="artist-stats">
@@ -950,11 +962,11 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
           </div>
           <div class="artist-stat">
             <div class="artist-stat-val">TH</div>
-            <div class="artist-stat-lbl"><span data-lang="en">Thailand</span><span data-lang="th">ตลาดไทย</span><span data-lang="lo">ຕະຫຼາດໄທ</span></div>
+            <div class="artist-stat-lbl"><span data-lang="en">Thailand</span><span data-lang="th">ตลาดไทย</span><span data-lang="lo">ຕະຫຼາດໄທ</span><span data-lang="zh">泰国</span></div>
           </div>
           <div class="artist-stat">
             <div class="artist-stat-val">LAO</div>
-            <div class="artist-stat-lbl"><span data-lang="en">Local</span><span data-lang="th">ท้องถิ่น</span><span data-lang="lo">ທ້ອງຖິ່ນ</span></div>
+            <div class="artist-stat-lbl"><span data-lang="en">Local</span><span data-lang="th">ท้องถิ่น</span><span data-lang="lo">ທ້ອງຖິ່ນ</span><span data-lang="zh">本地</span></div>
           </div>
         </div>
 
@@ -964,14 +976,14 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
           </div>
           <div>
             <div class="single-title">ແພງອ້າຍ (แพงอ้าย)</div>
-            <div class="single-views">300M+ <span data-lang="en">views · Signature single</span><span data-lang="th">วิว · เพลงหลัก</span><span data-lang="lo">ວິວ · ເພງຫຼັກ</span></div>
+            <div class="single-views">300M+ <span data-lang="en">views · Signature single</span><span data-lang="th">วิว · เพลงหลัก</span><span data-lang="lo">ວິວ · ເພງຫຼັກ</span><span data-lang="zh">次播放 · 代表单曲</span></div>
           </div>
         </a>
 
         <a href="#contact" class="btn-primary">
           <span data-lang="en">Book Nutdao</span>
           <span data-lang="th">จองนัดดาว</span>
-          <span data-lang="lo">ຈອງນັດດາວ</span>
+          <span data-lang="lo">ຈອງນັດດາວ</span><span data-lang="zh">预约努达奥</span>
         </a>
       </div>
     </div>
@@ -983,22 +995,22 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   <div class="inner">
     <div class="events-header">
       <div>
-        <p class="section-label"><span data-lang="en">Events</span><span data-lang="th">อีเวนต์</span><span data-lang="lo">ງານ</span></p>
+        <p class="section-label"><span data-lang="en">Events</span><span data-lang="th">อีเวนต์</span><span data-lang="lo">ງານ</span><span data-lang="zh">活动</span></p>
         <h2 class="section-title">
           <span data-lang="en">Nights that <em>matter</em></span>
           <span data-lang="th">คืนที่ <em>น่าจดจำ</em></span>
-          <span data-lang="lo">ຄືນທີ່ <em>ໜ້າຈົດຈຳ</em></span>
+          <span data-lang="lo">ຄືນທີ່ <em>ໜ້າຈົດຈຳ</em></span><span data-lang="zh">精彩不容错过的夜晚</span>
         </h2>
         <p class="events-tagline">
           <span data-lang="en">From intimate bar nights to large-scale club events with international DJs, PVRE HOUSE produces tailored nightlife experiences across Vientiane's best venues.</span>
           <span data-lang="th">จากงานบาร์สไตล์ส่วนตัวถึงคลับอีเวนต์กับ DJ นานาชาติ PVRE HOUSE จัดประสบการณ์ไนท์ไลฟ์ที่ดีที่สุดในเวียงจันทน์</span>
-          <span data-lang="lo">ຕັ້ງແຕ່ງານບາ຺ຂະໜາດນ້ອຍ ຈົນຮອດຄລັບໃຫ່ຍກັບ DJ ສາກົນ PVRE HOUSE ສ້າງປະສົບການຍາມຄໍ່າຄືນທີ່ດີທີ່ສຸດໃນວຽງຈັນ</span>
+          <span data-lang="lo">ຕັ້ງແຕ່ງານບາ຺ຂະໜາດນ້ອຍ ຈົນຮອດຄລັບໃຫ່ຍກັບ DJ ສາກົນ PVRE HOUSE ສ້າງປະສົບການຍາມຄໍ່າຄືນທີ່ດີທີ່ສຸດໃນວຽງຈັນ</span><span data-lang="zh">从小型酒吧夜活动到大型俱乐部盛事，PVRE HOUSE 为万象最优质的场所量身打造夜生活体验。</span>
         </p>
       </div>
       <a href="#contact" class="btn-ghost">
         <span data-lang="en">Plan an Event</span>
         <span data-lang="th">วางแผนอีเวนต์</span>
-        <span data-lang="lo">ວາງແຜນງານ</span>
+        <span data-lang="lo">ວາງແຜນງານ</span><span data-lang="zh">策划活动</span>
       </a>
     </div>
 
@@ -1009,11 +1021,11 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
           <div class="event-visual-icon">🎉</div>
         </div>
         <div class="event-body">
-          <h3 class="event-name"><span data-lang="en">Club Nights &amp; After-Parties</span><span data-lang="th">คืนคลับ &amp; อาฟเตอร์ปาร์ตี้</span><span data-lang="lo">ຄືນຄລັບ &amp; ອາເຟດປ໊າດຕີ</span></h3>
-          <p class="event-desc"><span data-lang="en">Full production of nightclub events — thematic concept, international DJ lineup, décor, security and digital communication.</span><span data-lang="th">จัดงานคลับครบวงจร — คอนเซ็ปต์ธีม ไลน์อัพ DJ นานาชาติ ตกแต่ง และสื่อดิจิทัล</span><span data-lang="lo">ຈັດການງານຄລັບຄົບຮູບແບບ — ຫົວຂໍ້ ໄລນ໌ອັບ DJ ສາກົນ ການຕົກແຕ່ງ ແລະ ສື່ດິຈິຕອນ</span></p>
+          <h3 class="event-name"><span data-lang="en">Club Nights &amp; After-Parties</span><span data-lang="th">คืนคลับ &amp; อาฟเตอร์ปาร์ตี้</span><span data-lang="lo">ຄືນຄລັບ &amp; ອາເຟດປ໊າດຕີ</span><span data-lang="zh">俱乐部之夜 &amp; 派对</span></h3>
+          <p class="event-desc"><span data-lang="en">Full production of nightclub events — thematic concept, international DJ lineup, décor, security and digital communication.</span><span data-lang="th">จัดงานคลับครบวงจร — คอนเซ็ปต์ธีม ไลน์อัพ DJ นานาชาติ ตกแต่ง และสื่อดิจิทัล</span><span data-lang="lo">ຈັດການງານຄລັບຄົບຮູບແບບ — ຫົວຂໍ້ ໄລນ໌ອັບ DJ ສາກົນ ການຕົກແຕ່ງ ແລະ ສື່ດິຈິຕອນ</span><span data-lang="zh">俱乐部活动全程制作——主题概念、国际 DJ 阵容、装饰布置、安保及数字宣传。</span></p>
           <div class="event-meta">
             <span class="event-meta-item">Vientiane</span>
-            <span class="event-meta-item"><span data-lang="en">Full Production</span><span data-lang="th">โปรดักชั่นครบ</span><span data-lang="lo">ຄົບຮູບແບບ</span></span>
+            <span class="event-meta-item"><span data-lang="en">Full Production</span><span data-lang="th">โปรดักชั่นครบ</span><span data-lang="lo">ຄົບຮູບແບບ</span><span data-lang="zh">全程制作</span></span>
           </div>
         </div>
       </div>
@@ -1024,10 +1036,10 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
           <div class="event-visual-icon">🥂</div>
         </div>
         <div class="event-body">
-          <h3 class="event-name"><span data-lang="en">Private Bar Events</span><span data-lang="th">งานบาร์ส่วนตัว</span><span data-lang="lo">ງານບາ຺ສ່ວນຕົວ</span></h3>
-          <p class="event-desc"><span data-lang="en">Exclusive bar or lounge nights — curated ambience, live music or international DJ set, guest and program management.</span><span data-lang="th">งานบาร์หรือเลานจ์เฉพาะ — บรรยากาศพิเศษ ดนตรีสด หรือ DJ เซ็ตนานาชาติ</span><span data-lang="lo">ງານບາ຺ ຫຼື ລາວ຺ຈ໌ — ບັນຍາກາດພິເສດ ດົນຕີສົດ ຫຼື DJ ເຊັດສາກົນ</span></p>
+          <h3 class="event-name"><span data-lang="en">Private Bar Events</span><span data-lang="th">งานบาร์ส่วนตัว</span><span data-lang="lo">ງານບາ຺ສ່ວນຕົວ</span><span data-lang="zh">私人酒吧活动</span></h3>
+          <p class="event-desc"><span data-lang="en">Exclusive bar or lounge nights — curated ambience, live music or international DJ set, guest and program management.</span><span data-lang="th">งานบาร์หรือเลานจ์เฉพาะ — บรรยากาศพิเศษ ดนตรีสด หรือ DJ เซ็ตนานาชาติ</span><span data-lang="lo">ງານບາ຺ ຫຼື ລາວ຺ຈ໌ — ບັນຍາກາດພິເສດ ດົນຕີສົດ ຫຼື DJ ເຊັດສາກົນ</span><span data-lang="zh">专属酒吧或休息室夜活动——精选氛围、现场音乐或国际 DJ 表演、宾客及流程管理。</span></p>
           <div class="event-meta">
-            <span class="event-meta-item"><span data-lang="en">Private or Public</span><span data-lang="th">ส่วนตัวหรือสาธารณะ</span><span data-lang="lo">ສ່ວນຕົວ ຫຼື ສາທາລະນະ</span></span>
+            <span class="event-meta-item"><span data-lang="en">Private or Public</span><span data-lang="th">ส่วนตัวหรือสาธารณะ</span><span data-lang="lo">ສ່ວນຕົວ ຫຼື ສາທາລະນະ</span><span data-lang="zh">私人或公开</span></span>
           </div>
         </div>
       </div>
@@ -1038,11 +1050,11 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
           <div class="event-visual-icon">✦</div>
         </div>
         <div class="event-body">
-          <h3 class="event-name"><span data-lang="en">Corporate Events</span><span data-lang="th">งาน Corporate</span><span data-lang="lo">ງານ Corporate</span></h3>
-          <p class="event-desc"><span data-lang="en">Product launches, client nights or company celebrations — we bring the energy and professionalism that a premium event deserves.</span><span data-lang="th">เปิดตัวผลิตภัณฑ์ งานลูกค้า หรือฉลองบริษัท — เราสร้างพลังงานและความเป็นมืออาชีพ</span><span data-lang="lo">ເປີດໂຕສິນຄ້າ ງານລູກຄ້າ ຫຼື ງານສະເຫຼີມສະຫຼອງ — ພວກເຮົານຳພະລັງງານ ແລະ ຄວາມເປັນມືອາຊີບ</span></p>
+          <h3 class="event-name"><span data-lang="en">Corporate Events</span><span data-lang="th">งาน Corporate</span><span data-lang="lo">ງານ Corporate</span><span data-lang="zh">企业活动</span></h3>
+          <p class="event-desc"><span data-lang="en">Product launches, client nights or company celebrations — we bring the energy and professionalism that a premium event deserves.</span><span data-lang="th">เปิดตัวผลิตภัณฑ์ งานลูกค้า หรือฉลองบริษัท — เราสร้างพลังงานและความเป็นมืออาชีพ</span><span data-lang="lo">ເປີດໂຕສິນຄ້າ ງານລູກຄ້າ ຫຼື ງານສະເຫຼີມສະຫຼອງ — ພວກເຮົານຳພະລັງງານ ແລະ ຄວາມເປັນມືອາຊີບ</span><span data-lang="zh">产品发布会、客户之夜或公司庆典——我们为高端活动带来能量与专业品质。</span></p>
           <div class="event-meta">
-            <span class="event-meta-item"><span data-lang="en">Artist Included</span><span data-lang="th">รวมศิลปิน</span><span data-lang="lo">ລວມສິລະປິນ</span></span>
-            <span class="event-meta-item"><span data-lang="en">Turnkey</span><span data-lang="th">ครบวงจร</span><span data-lang="lo">ຄົບຮູບແບບ</span></span>
+            <span class="event-meta-item"><span data-lang="en">Artist Included</span><span data-lang="th">รวมศิลปิน</span><span data-lang="lo">ລວມສິລະປິນ</span><span data-lang="zh">艺人出场</span></span>
+            <span class="event-meta-item"><span data-lang="en">Turnkey</span><span data-lang="th">ครบวงจร</span><span data-lang="lo">ຄົບຮູບແບບ</span><span data-lang="zh">一站式服务</span></span>
           </div>
         </div>
       </div>
@@ -1055,11 +1067,11 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   <div class="dj-bg"></div>
   <div class="inner" style="position:relative">
     <div style="margin-bottom:60px">
-      <p class="section-label"><span data-lang="en">Worldwide → Vientiane</span><span data-lang="th">ทั่วโลก → เวียงจันทน์</span><span data-lang="lo">ທົ່ວໂລກ → ວຽງຈັນ</span></p>
+      <p class="section-label"><span data-lang="en">Worldwide → Vientiane</span><span data-lang="th">ทั่วโลก → เวียงจันทน์</span><span data-lang="lo">ທົ່ວໂລກ → ວຽງຈັນ</span><span data-lang="zh">全球 → 万象</span></p>
       <h2 class="section-title">
         <span data-lang="en">International DJs<br><em>in Laos</em></span>
         <span data-lang="th">DJ นานาชาติ<br><em>ในลาว</em></span>
-        <span data-lang="lo">DJ ສາກົນ<br><em>ໃນລາວ</em></span>
+        <span data-lang="lo">DJ ສາກົນ<br><em>ໃນລາວ</em></span><span data-lang="zh">国际 DJ 登陆老挝</span>
       </h2>
     </div>
 
@@ -1068,29 +1080,29 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
         <div class="dj-step">
           <div class="dj-step-num">01</div>
           <div>
-            <h3 class="dj-step-title"><span data-lang="en">Consultation &amp; Selection</span><span data-lang="th">ปรึกษา &amp; คัดเลือก</span><span data-lang="lo">ປຶກສາ &amp; ຄັດເລືອກ</span></h3>
-            <p class="dj-step-text"><span data-lang="en">We discuss your event — genre, vibe, budget, date. We then select from our international network the DJs who best match your vision.</span><span data-lang="th">เราคุยเรื่องงานของคุณ — แนวเพลง บรรยากาศ งบประมาณ และวันที่ จากนั้นคัดเลือก DJ ที่เหมาะกับวิสัยทัศน์ของคุณ</span><span data-lang="lo">ພວກເຮົາລົມກ່ຽວກັບງານຂອງທ່ານ — ແນວດົນຕີ ບັນຍາກາດ ງົບ ແລະ ວັນທີ. ຈາກນັ້ນຄັດເລືອກ DJ ທີ່ດີທີ່ສຸດ</span></p>
+            <h3 class="dj-step-title"><span data-lang="en">Consultation &amp; Selection</span><span data-lang="th">ปรึกษา &amp; คัดเลือก</span><span data-lang="lo">ປຶກສາ &amp; ຄັດເລືອກ</span><span data-lang="zh">咨询与选择</span></h3>
+            <p class="dj-step-text"><span data-lang="en">We discuss your event — genre, vibe, budget, date. We then select from our international network the DJs who best match your vision.</span><span data-lang="th">เราคุยเรื่องงานของคุณ — แนวเพลง บรรยากาศ งบประมาณ และวันที่ จากนั้นคัดเลือก DJ ที่เหมาะกับวิสัยทัศน์ของคุณ</span><span data-lang="lo">ພວກເຮົາລົມກ່ຽວກັບງານຂອງທ່ານ — ແນວດົນຕີ ບັນຍາກາດ ງົບ ແລະ ວັນທີ. ຈາກນັ້ນຄັດເລືອກ DJ ທີ່ດີທີ່ສຸດ</span><span data-lang="zh">我们深入了解您的活动——音乐风格、氛围、预算、日期，然后从国际资源网络中为您甄选最契合的 DJ。</span></p>
           </div>
         </div>
         <div class="dj-step">
           <div class="dj-step-num">02</div>
           <div>
-            <h3 class="dj-step-title"><span data-lang="en">Quote &amp; Contract</span><span data-lang="th">ใบเสนอราคา &amp; สัญญา</span><span data-lang="lo">ໃບສະເໜີລາຄາ &amp; ສັນຍາ</span></h3>
-            <p class="dj-step-text"><span data-lang="en">A transparent proposal covering artist fee, international travel, accommodation and technical rider. Formal contract to secure the collaboration.</span><span data-lang="th">ใบเสนอราคาโปร่งใส ครอบคลุมค่าตัวศิลปิน ค่าเดินทาง ที่พัก และเทคนิคไรเดอร์ พร้อมสัญญาอย่างเป็นทางการ</span><span data-lang="lo">ໃບສະເໜີໂປ່ງໃສ ລວມຄ່າສິລະປິນ ການເດີນທາງ ທີ່ພັກ ແລະ ດ້ານເຕັກນິກ. ສັນຍາຢ່າງເປັນທາງການ</span></p>
+            <h3 class="dj-step-title"><span data-lang="en">Quote &amp; Contract</span><span data-lang="th">ใบเสนอราคา &amp; สัญญา</span><span data-lang="lo">ໃບສະເໜີລາຄາ &amp; ສັນຍາ</span><span data-lang="zh">报价与合同</span></h3>
+            <p class="dj-step-text"><span data-lang="en">A transparent proposal covering artist fee, international travel, accommodation and technical rider. Formal contract to secure the collaboration.</span><span data-lang="th">ใบเสนอราคาโปร่งใส ครอบคลุมค่าตัวศิลปิน ค่าเดินทาง ที่พัก และเทคนิคไรเดอร์ พร้อมสัญญาอย่างเป็นทางการ</span><span data-lang="lo">ໃບສະເໜີໂປ່ງໃສ ລວມຄ່າສິລະປິນ ການເດີນທາງ ທີ່ພັກ ແລະ ດ້ານເຕັກນິກ. ສັນຍາຢ່າງເປັນທາງການ</span><span data-lang="zh">透明的方案涵盖艺人费用、国际交通、住宿及技术规格。签订正式合同以保障合作。</span></p>
           </div>
         </div>
         <div class="dj-step">
           <div class="dj-step-num">03</div>
           <div>
-            <h3 class="dj-step-title"><span data-lang="en">Logistics &amp; Coordination</span><span data-lang="th">โลจิสติกส์ &amp; ประสานงาน</span><span data-lang="lo">ການຂົນສົ່ງ &amp; ການປະສານງານ</span></h3>
-            <p class="dj-step-text"><span data-lang="en">We manage the entire journey from anywhere in the world — flights, visa, accommodation — and coordinate with your technical team on the ground in Vientiane.</span><span data-lang="th">เราจัดการทุกขั้นตอนจากทุกที่ในโลก — เที่ยวบิน วีซ่า ที่พัก และประสานงานกับทีมเทคนิคในเวียงจันทน์</span><span data-lang="lo">ພວກເຮົາຈັດການທຸກຢ່າງຈາກທຸກທີ່ໃນໂລກ — ຕ໋ວ ວີຊ້າ ທີ່ພັກ ແລະ ປະສານງານກັບທີມເຕັກນິກໃນວຽງຈັນ</span></p>
+            <h3 class="dj-step-title"><span data-lang="en">Logistics &amp; Coordination</span><span data-lang="th">โลจิสติกส์ &amp; ประสานงาน</span><span data-lang="lo">ການຂົນສົ່ງ &amp; ການປະສານງານ</span><span data-lang="zh">后勤与协调</span></h3>
+            <p class="dj-step-text"><span data-lang="en">We manage the entire journey from anywhere in the world — flights, visa, accommodation — and coordinate with your technical team on the ground in Vientiane.</span><span data-lang="th">เราจัดการทุกขั้นตอนจากทุกที่ในโลก — เที่ยวบิน วีซ่า ที่พัก และประสานงานกับทีมเทคนิคในเวียงจันทน์</span><span data-lang="lo">ພວກເຮົາຈັດການທຸກຢ່າງຈາກທຸກທີ່ໃນໂລກ — ຕ໋ວ ວີຊ້າ ທີ່ພັກ ແລະ ປະສານງານກັບທີມເຕັກນິກໃນວຽງຈັນ</span><span data-lang="zh">我们全程管理从世界各地到场的旅程——机票、签证、住宿——并与万象当地技术团队协调对接。</span></p>
           </div>
         </div>
         <div class="dj-step">
           <div class="dj-step-num">04</div>
           <div>
-            <h3 class="dj-step-title"><span data-lang="en">Performance &amp; Follow-up</span><span data-lang="th">การแสดง &amp; ติดตามผล</span><span data-lang="lo">ການສະແດງ &amp; ຕິດຕາມຜົນ</span></h3>
-            <p class="dj-step-text"><span data-lang="en">A PVRE HOUSE representative is present on the night. After the event, a performance debrief and readiness for your next collaboration.</span><span data-lang="th">ตัวแทน PVRE HOUSE อยู่ในคืนนั้น หลังงานมีการสรุปผลและพร้อมสำหรับการร่วมงานครั้งต่อไป</span><span data-lang="lo">ຕົວແທນ PVRE HOUSE ຢູ່ໃນຄືນນັ້ນ. ຫຼັງງານ ມີການສະຫຼຸບ ແລະ ພ້ອມສຳລັບຄັ້ງຕໍ່ໄປ</span></p>
+            <h3 class="dj-step-title"><span data-lang="en">Performance &amp; Follow-up</span><span data-lang="th">การแสดง &amp; ติดตามผล</span><span data-lang="lo">ການສະແດງ &amp; ຕິດຕາມຜົນ</span><span data-lang="zh">演出与跟进</span></h3>
+            <p class="dj-step-text"><span data-lang="en">A PVRE HOUSE representative is present on the night. After the event, a performance debrief and readiness for your next collaboration.</span><span data-lang="th">ตัวแทน PVRE HOUSE อยู่ในคืนนั้น หลังงานมีการสรุปผลและพร้อมสำหรับการร่วมงานครั้งต่อไป</span><span data-lang="lo">ຕົວແທນ PVRE HOUSE ຢູ່ໃນຄືນນັ້ນ. ຫຼັງງານ ມີການສະຫຼຸບ ແລະ ພ້ອມສຳລັບຄັ້ງຕໍ່ໄປ</span><span data-lang="zh">PVRE HOUSE 代表将出席当晚活动。活动结束后提供演出总结，并为您的下次合作做好准备。</span></p>
           </div>
         </div>
       </div>
@@ -1100,30 +1112,30 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
           <h3 class="dj-feature-title">
             <span data-lang="en">The global stage,<br><em>in Laos</em></span>
             <span data-lang="th">เวทีระดับโลก,<br><em>ในลาว</em></span>
-            <span data-lang="lo">ເວທີລະດັບໂລກ,<br><em>ໃນລາວ</em></span>
+            <span data-lang="lo">ເວທີລະດັບໂລກ,<br><em>ໃນລາວ</em></span><span data-lang="zh">将全球舞台带到老挝</span>
           </h3>
           <p class="dj-feature-text">
             <span data-lang="en">PVRE HOUSE is the go-to agency for importing international DJs to Laos. Our network spans Europe, Asia and the Americas — we are the only contact you need.</span>
             <span data-lang="th">PVRE HOUSE คือเอเจนซี่อ้างอิงสำหรับนำ DJ นานาชาติมาลาว เครือข่ายของเราครอบคลุมยุโรป เอเชีย และอเมริกา</span>
-            <span data-lang="lo">PVRE HOUSE ແມ່ນອົງກອນຫຼັກສຳລັບການນຳ DJ ສາກົນມາລາວ. ເຄືອຂ່າຍຂອງພວກເຮົາຄອບຄຸມເອີຣົບ ອາຊີ ແລະ ອາເມລິກາ</span>
+            <span data-lang="lo">PVRE HOUSE ແມ່ນອົງກອນຫຼັກສຳລັບການນຳ DJ ສາກົນມາລາວ. ເຄືອຂ່າຍຂອງພວກເຮົາຄອບຄຸມເອີຣົບ ອາຊີ ແລະ ອາເມລິກາ</span><span data-lang="zh">PVRE HOUSE 是将国际 DJ 引入老挝的首选机构。我们的资源网络横跨欧洲、亚洲与美洲——我们是您唯一需要的联系人。</span>
           </p>
           <div class="dj-cities">
             <div class="dj-city-row">
-              <span class="dj-city-name"><span data-lang="en">Europe</span><span data-lang="th">ยุโรป</span><span data-lang="lo">ເອີຣົບ</span></span>
-              <span class="dj-city-tag"><span data-lang="en">Network</span><span data-lang="th">เครือข่าย</span><span data-lang="lo">ເຄືອຂ່າຍ</span></span>
+              <span class="dj-city-name"><span data-lang="en">Europe</span><span data-lang="th">ยุโรป</span><span data-lang="lo">ເອີຣົບ</span><span data-lang="zh">欧洲</span></span>
+              <span class="dj-city-tag"><span data-lang="en">Network</span><span data-lang="th">เครือข่าย</span><span data-lang="lo">ເຄືອຂ່າຍ</span><span data-lang="zh">资源网络</span></span>
             </div>
             <div class="dj-city-row">
-              <span class="dj-city-name"><span data-lang="en">Asia</span><span data-lang="th">เอเชีย</span><span data-lang="lo">ອາຊີ</span></span>
-              <span class="dj-city-tag"><span data-lang="en">Network</span><span data-lang="th">เครือข่าย</span><span data-lang="lo">ເຄືອຂ່າຍ</span></span>
+              <span class="dj-city-name"><span data-lang="en">Asia</span><span data-lang="th">เอเชีย</span><span data-lang="lo">ອາຊີ</span><span data-lang="zh">亚洲</span></span>
+              <span class="dj-city-tag"><span data-lang="en">Network</span><span data-lang="th">เครือข่าย</span><span data-lang="lo">ເຄືອຂ່າຍ</span><span data-lang="zh">资源网络</span></span>
             </div>
             <div class="dj-city-row">
               <span class="dj-city-name">Vientiane</span>
-              <span class="dj-city-tag"><span data-lang="en">Destination</span><span data-lang="th">จุดหมาย</span><span data-lang="lo">ຈຸດໝາຍ</span></span>
+              <span class="dj-city-tag"><span data-lang="en">Destination</span><span data-lang="th">จุดหมาย</span><span data-lang="lo">ຈຸດໝາຍ</span><span data-lang="zh">目的地</span></span>
             </div>
           </div>
         </div>
         <div style="background:var(--card);border:1px solid var(--border);padding:26px;display:flex;flex-direction:column;gap:10px">
-          <p style="font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--champ)"><span data-lang="en">Genres &amp; Styles</span><span data-lang="th">แนวเพลง</span><span data-lang="lo">ແນວດົນຕີ</span></p>
+          <p style="font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--champ)"><span data-lang="en">Genres &amp; Styles</span><span data-lang="th">แนวเพลง</span><span data-lang="lo">ແນວດົນຕີ</span><span data-lang="zh">风格与流派</span></p>
           <div style="display:flex;flex-wrap:wrap;gap:7px">
             <span class="tag">House</span><span class="tag">Tech House</span><span class="tag">Deep House</span>
             <span class="tag">Afro House</span><span class="tag">Progressive</span><span class="tag">Commercial</span>
@@ -1140,11 +1152,11 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
 <!-- ══════════════════════════════════════ PARTNERS ══════════════════════════════════════ -->
 <section class="why-section" id="partners" style="border-top:1px solid var(--border)">
   <div class="inner">
-    <p class="section-label"><span data-lang="en">Event Partners</span><span data-lang="th">พาร์ทเนอร์งาน</span><span data-lang="lo">ຄູ່ຮ່ວມງານ</span></p>
+    <p class="section-label"><span data-lang="en">Event Partners</span><span data-lang="th">พาร์ทเนอร์งาน</span><span data-lang="lo">ຄູ່ຮ່ວມງານ</span><span data-lang="zh">活动合作伙伴</span></p>
     <h2 class="section-title">
       <span data-lang="en">Our <em>partners</em> in Thailand</span>
       <span data-lang="th">พาร์ทเนอร์<em>ของเรา</em>ในไทย</span>
-      <span data-lang="lo">ຄູ່ຮ່ວມງານ<em>ຂອງພວກເຮົາ</em>ໃນໄທ</span>
+      <span data-lang="lo">ຄູ່ຮ່ວມງານ<em>ຂອງພວກເຮົາ</em>ໃນໄທ</span><span data-lang="zh">我们在泰国的合作伙伴</span>
     </h2>
     <div style="display:flex;flex-direction:column;gap:2px;margin-top:60px">
 
@@ -1163,7 +1175,7 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
             <p style="font-size:0.86rem;line-height:1.8;color:var(--mid);margin-bottom:22px">
               <span data-lang="en">Premium DJ event brand based in Thailand. MICASASUCASA brings a curated House &amp; Electronic music experience to Bangkok's finest venues — <strong style="color:var(--rg)">Baccarat, House of Savoy, Tarot, Upper House</strong> and more. Quality bookings, immersive atmosphere, dedicated crowd.</span>
               <span data-lang="th">แบรนด์งาน DJ ระดับพรีเมียมในไทย MICASASUCASA จัดงานในสถานที่ชั้นนำของกรุงเทพฯ — <strong style="color:var(--rg)">Baccarat, House of Savoy, Tarot, Upper House</strong> และอื่นๆ ดนตรี House &amp; Electronic คัดสรร บรรยากาศดีเยี่ยม กลุ่มแฟนดนตรีตัวจริง</span>
-              <span data-lang="lo">ແບຣນດ໌ງານ DJ ລະດັບພຣີເມີຍມໃນໄທ. MICASASUCASA ຈັດງານໃນສະຖານທີ່ຊັ້ນນຳຂອງກຸງເທບ — <strong style="color:var(--rg)">Baccarat, House of Savoy, Tarot, Upper House</strong> ແລະ ອື່ນໆ. ດົນຕີ House &amp; Electronic ຄຸນນະພາບ ບັນຍາກາດດີ ຜູ້ຊົມທີ່ຮັກດົນຕີ</span>
+              <span data-lang="lo">ແບຣນດ໌ງານ DJ ລະດັບພຣີເມີຍມໃນໄທ. MICASASUCASA ຈັດງານໃນສະຖານທີ່ຊັ້ນນຳຂອງກຸງເທບ — <strong style="color:var(--rg)">Baccarat, House of Savoy, Tarot, Upper House</strong> ແລະ ອື່ນໆ. ດົນຕີ House &amp; Electronic ຄຸນນະພາບ ບັນຍາກາດດີ ຜູ້ຊົມທີ່ຮັກດົນຕີ</span><span data-lang="zh">立足泰国的高端 DJ 活动品牌。MICASASUCASA 为曼谷最优质的场所带来精选 House 和电子音乐体验——Baccarat、House of Savoy、Tarot、Upper House 等。</span>
             </p>
             <div class="service-tags">
               <span class="tag">House</span>
@@ -1202,7 +1214,7 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
           <p style="font-size:0.86rem;line-height:1.8;color:var(--mid);margin-bottom:16px;max-width:480px">
             <span data-lang="en">Founded in 2014 in Düsseldorf, Fresh Kidz is an international Hip-Hop, R&amp;B and Urban event brand built on one idea: <em>awaken your inner child</em>. Over a decade of events across Europe — Düsseldorf, Cologne, Berlin, Amsterdam, Paris — and now Bangkok, they&apos;ve shared stages with <strong style="color:var(--rg)">Drake, Chris Brown, Wizkid, Trey Songz, J Balvin, Kehlani, Migos</strong> and many more. 237 is their Bangkok chapter, bringing that same international energy to Thailand&apos;s finest venues.</span>
             <span data-lang="th">ก่อตั้งปี 2014 ที่ดุสเซลดอร์ฟ Fresh Kidz คือแบรนด์งาน Hip-Hop, R&amp;B และ Urban ระดับนานาชาติ ที่เติบโตจากยุโรปสู่กรุงเทพฯ ตลอดกว่า 10 ปี พวกเขาได้ร่วมงานกับศิลปินระดับโลกอย่าง <strong style="color:var(--rg)">Drake, Chris Brown, Wizkid, Trey Songz, J Balvin</strong> และอีกมากมาย 237 คือบทกรุงเทพฯ ของ Fresh Kidz — พลังงานระดับโลกในเวทีของไทย</span>
-            <span data-lang="lo">ກໍ່ຕັ້ງໃນປີ 2014 ທີ່ Düsseldorf, Fresh Kidz ແມ່ນແບຣນດ໌ງານ Hip-Hop, R&amp;B ແລະ Urban ລະດັບສາກົນ ທີ່ເຕີບໃຫຍ່ຈາກເອີຣົບມາສູ່ກຸງເທບ. ກວ່າ 10 ປີ ພວກເຂົາໄດ້ຮ່ວມງານກັບ <strong style="color:var(--rg)">Drake, Chris Brown, Wizkid, Trey Songz, J Balvin</strong> ແລະ ອີກຫຼາຍຄົນ. 237 ແມ່ນບົດກຸງເທບຂອງ Fresh Kidz — ພະລັງງານລະດັບໂລກໃນເວທີຂອງໄທ</span>
+            <span data-lang="lo">ກໍ່ຕັ້ງໃນປີ 2014 ທີ່ Düsseldorf, Fresh Kidz ແມ່ນແບຣນດ໌ງານ Hip-Hop, R&amp;B ແລະ Urban ລະດັບສາກົນ ທີ່ເຕີບໃຫຍ່ຈາກເອີຣົບມາສູ່ກຸງເທບ. ກວ່າ 10 ປີ ພວກເຂົາໄດ້ຮ່ວມງານກັບ <strong style="color:var(--rg)">Drake, Chris Brown, Wizkid, Trey Songz, J Balvin</strong> ແລະ ອີກຫຼາຍຄົນ. 237 ແມ່ນບົດກຸງເທບຂອງ Fresh Kidz — ພະລັງງານລະດັບໂລກໃນເວທີຂອງໄທ</span><span data-lang="zh">2014 年创立于德国杜塞尔多夫，Fresh Kidz 是一个国际嘻哈、R&amp;B 与都市音乐活动品牌，秉承同一理念：<em>唤醒你内心的孩子</em>。十年间横跨欧洲各地举办活动——杜塞尔多夫、科隆、柏林、阿姆斯特丹、巴黎，如今抵达曼谷，与 <strong style="color:var(--rg)">Drake、Chris Brown、Wizkid、Trey Songz、J Balvin、Kehlani、Migos</strong> 等众多明星同台。237 是他们的曼谷篇章，将同等的国际能量带入泰国顶级场所。</span>
           </p>
           <div class="service-tags">
             <span class="tag">Hip-Hop</span>
@@ -1227,32 +1239,32 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
 <!-- ══════════════════════════════════════ WHY ══════════════════════════════════════ -->
 <section class="why-section">
   <div class="inner">
-    <p class="section-label"><span data-lang="en">Why Choose Us</span><span data-lang="th">ทำไมต้องเลือกเรา</span><span data-lang="lo">ເປັນຫຍັງຕ້ອງເລືອກພວກເຮົາ</span></p>
+    <p class="section-label"><span data-lang="en">Why Choose Us</span><span data-lang="th">ทำไมต้องเลือกเรา</span><span data-lang="lo">ເປັນຫຍັງຕ້ອງເລືອກພວກເຮົາ</span><span data-lang="zh">为何选择我们</span></p>
     <h2 class="section-title">
       <span data-lang="en">The <em>PVRE HOUSE</em> advantage</span>
       <span data-lang="th">ข้อได้เปรียบ <em>PVRE HOUSE</em></span>
-      <span data-lang="lo">ຂໍ້ໄດ້ປຽບ <em>PVRE HOUSE</em></span>
+      <span data-lang="lo">ຂໍ້ໄດ້ປຽບ <em>PVRE HOUSE</em></span><span data-lang="zh">PVRE HOUSE 的优势</span>
     </h2>
     <div class="why-grid">
       <div class="why-card fade-up">
         <span class="why-icon">🌏</span>
-        <h3 class="why-title"><span data-lang="en">Global Network</span><span data-lang="th">เครือข่ายทั่วโลก</span><span data-lang="lo">ເຄືອຂ່າຍທົ່ວໂລກ</span></h3>
-        <p class="why-text"><span data-lang="en">International DJs from every corner of the globe and Lao talents — a worldwide network at Laos's service.</span><span data-lang="th">DJ นานาชาติจากทั่วโลกและศิลปินลาว — เครือข่ายทั่วโลกเพื่อลาว</span><span data-lang="lo">DJ ສາກົນຈາກທຸກມຸມໂລກ ແລະ ສິລະປິນລາວ — ເຄືອຂ່າຍທົ່ວໂລກເພື່ອລາວ</span></p>
+        <h3 class="why-title"><span data-lang="en">Global Network</span><span data-lang="th">เครือข่ายทั่วโลก</span><span data-lang="lo">ເຄືອຂ່າຍທົ່ວໂລກ</span><span data-lang="zh">全球资源网络</span></h3>
+        <p class="why-text"><span data-lang="en">International DJs from every corner of the globe and Lao talents — a worldwide network at Laos's service.</span><span data-lang="th">DJ นานาชาติจากทั่วโลกและศิลปินลาว — เครือข่ายทั่วโลกเพื่อลาว</span><span data-lang="lo">DJ ສາກົນຈາກທຸກມຸມໂລກ ແລະ ສິລະປິນລາວ — ເຄືອຂ່າຍທົ່ວໂລກເພື່ອລາວ</span><span data-lang="zh">来自全球各地的国际 DJ 及老挝本土艺人——为老挝服务的全球资源网络。</span></p>
       </div>
       <div class="why-card fade-up" style="transition-delay:0.08s">
         <span class="why-icon">⚡</span>
-        <h3 class="why-title"><span data-lang="en">Responsive</span><span data-lang="th">ตอบสนองรวดเร็ว</span><span data-lang="lo">ຕອບສະໜອງໄວ</span></h3>
-        <p class="why-text"><span data-lang="en">Fast replies, quotes within 48h, smooth coordination across all stakeholders internationally.</span><span data-lang="th">ตอบเร็ว ใบเสนอราคาภายใน 48 ชม. ประสานงานราบรื่นระดับนานาชาติ</span><span data-lang="lo">ຕອບໄວ ໃບສະເໜີລາຄາພາຍໃນ 48 ຊ.ມ. ປະສານງານ​ລາດ​ຊ້ວຍລະດັບສາກົນ</span></p>
+        <h3 class="why-title"><span data-lang="en">Responsive</span><span data-lang="th">ตอบสนองรวดเร็ว</span><span data-lang="lo">ຕອບສະໜອງໄວ</span><span data-lang="zh">高效响应</span></h3>
+        <p class="why-text"><span data-lang="en">Fast replies, quotes within 48h, smooth coordination across all stakeholders internationally.</span><span data-lang="th">ตอบเร็ว ใบเสนอราคาภายใน 48 ชม. ประสานงานราบรื่นระดับนานาชาติ</span><span data-lang="lo">ຕອບໄວ ໃບສະເໜີລາຄາພາຍໃນ 48 ຊ.ມ. ປະສານງານ​ລາດ​ຊ້ວຍລະດັບສາກົນ</span><span data-lang="zh">快速回复，48小时内提供报价，与各方国际合作方顺畅协调。</span></p>
       </div>
       <div class="why-card fade-up" style="transition-delay:0.16s">
         <span class="why-icon">🎯</span>
-        <h3 class="why-title"><span data-lang="en">Tailored</span><span data-lang="th">เฉพาะตัว</span><span data-lang="lo">ສ່ວນຕົວ</span></h3>
-        <p class="why-text"><span data-lang="en">Every project is unique. We tailor our offer to your needs, budget and audience.</span><span data-lang="th">ทุกโปรเจกต์ไม่เหมือนกัน เราปรับบริการให้เหมาะกับความต้องการและกลุ่มเป้าหมาย</span><span data-lang="lo">ທຸກໂຄງການແມ່ນເປັນເອກະລັກ. ພວກເຮົາປັບໃຫ້ເໝາະກັບຄວາມຕ້ອງການ ງົບ ແລະ ຜູ້ຊົມ</span></p>
+        <h3 class="why-title"><span data-lang="en">Tailored</span><span data-lang="th">เฉพาะตัว</span><span data-lang="lo">ສ່ວນຕົວ</span><span data-lang="zh">量身定制</span></h3>
+        <p class="why-text"><span data-lang="en">Every project is unique. We tailor our offer to your needs, budget and audience.</span><span data-lang="th">ทุกโปรเจกต์ไม่เหมือนกัน เราปรับบริการให้เหมาะกับความต้องการและกลุ่มเป้าหมาย</span><span data-lang="lo">ທຸກໂຄງການແມ່ນເປັນເອກະລັກ. ພວກເຮົາປັບໃຫ້ເໝາະກັບຄວາມຕ້ອງການ ງົບ ແລະ ຜູ້ຊົມ</span><span data-lang="zh">每个项目都是独一无二的。我们根据您的需求、预算和受众量身打造方案。</span></p>
       </div>
       <div class="why-card fade-up" style="transition-delay:0.24s">
         <span class="why-icon">🤝</span>
-        <h3 class="why-title"><span data-lang="en">Trust</span><span data-lang="th">ความไว้วางใจ</span><span data-lang="lo">ຄວາມໄວ້ວາງໃຈ</span></h3>
-        <p class="why-text"><span data-lang="en">Direct relationships with artists and DJs. No unnecessary middlemen — transparent and reliable.</span><span data-lang="th">ความสัมพันธ์โดยตรงกับศิลปินและ DJ ไม่มีคนกลางที่ไม่จำเป็น — โปร่งใสและน่าเชื่อถือ</span><span data-lang="lo">ຄວາມສຳພັນໂດຍກົງກັບສິລະປິນ ແລະ DJ. ບໍ່ມີຕົວກາງທີ່ບໍ່ຈຳເປັນ — ໂປ່ງໃສ ແລະ ໜ້າເຊື່ອຖື</span></p>
+        <h3 class="why-title"><span data-lang="en">Trust</span><span data-lang="th">ความไว้วางใจ</span><span data-lang="lo">ຄວາມໄວ້ວາງໃຈ</span><span data-lang="zh">值得信赖</span></h3>
+        <p class="why-text"><span data-lang="en">Direct relationships with artists and DJs. No unnecessary middlemen — transparent and reliable.</span><span data-lang="th">ความสัมพันธ์โดยตรงกับศิลปินและ DJ ไม่มีคนกลางที่ไม่จำเป็น — โปร่งใสและน่าเชื่อถือ</span><span data-lang="lo">ຄວາມສຳພັນໂດຍກົງກັບສິລະປິນ ແລະ DJ. ບໍ່ມີຕົວກາງທີ່ບໍ່ຈຳເປັນ — ໂປ່ງໃສ ແລະ ໜ້າເຊື່ອຖື</span><span data-lang="zh">与艺人及 DJ 建立直接合作关系。无多余中间环节——透明、可靠。</span></p>
       </div>
     </div>
   </div>
@@ -1265,16 +1277,16 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
   <div class="inner">
     <div class="contact-layout">
       <div class="fade-up">
-        <p class="section-label"><span data-lang="en">Contact Us</span><span data-lang="th">ติดต่อเรา</span><span data-lang="lo">ຕິດຕໍ່ພວກເຮົາ</span></p>
+        <p class="section-label"><span data-lang="en">Contact Us</span><span data-lang="th">ติดต่อเรา</span><span data-lang="lo">ຕິດຕໍ່ພວກເຮົາ</span><span data-lang="zh">联系我们</span></p>
         <h2 class="contact-headline">
           <span data-lang="en">Let's talk about your <em>next project</em></span>
           <span data-lang="th">มาคุยเรื่อง <em>โปรเจกต์ต่อไป</em></span>
-          <span data-lang="lo">ມາລົມກ່ຽວກັບ <em>ໂຄງການຕໍ່ໄປ</em></span>
+          <span data-lang="lo">ມາລົມກ່ຽວກັບ <em>ໂຄງການຕໍ່ໄປ</em></span><span data-lang="zh">欢迎洽谈您的下一个项目</span>
         </h2>
         <p class="contact-subtext">
           <span data-lang="en">International DJ booking in Laos, Lao artist representation in Thailand or locally, or event production — contact us and we'll get back to you within 24h.</span>
           <span data-lang="th">จอง DJ นานาชาติในลาว ตัวแทนศิลปินลาวในไทยหรือลาว หรือจัดงาน — ติดต่อเราและเราจะตอบกลับภายใน 24 ชม.</span>
-          <span data-lang="lo">ຈອງ DJ ສາກົນໃນລາວ ຕາງໜ້າສິລະປິນລາວໃນໄທ ຫຼື ລາວ ຫຼື ຈັດງານ — ຕິດຕໍ່ພວກເຮົາ ແລະ ພວກເຮົາຈະຕອບກັບພາຍໃນ 24 ຊ.ມ.</span>
+          <span data-lang="lo">ຈອງ DJ ສາກົນໃນລາວ ຕາງໜ້າສິລະປິນລາວໃນໄທ ຫຼື ລາວ ຫຼື ຈັດງານ — ຕິດຕໍ່ພວກເຮົາ ແລະ ພວກເຮົາຈະຕອບກັບພາຍໃນ 24 ຊ.ມ.</span><span data-lang="zh">国际 DJ 入驻老挝、老挝艺人代理进入泰国或本地市场，或活动制作——请联系我们，我们将在 24 小时内回复。</span>
         </p>
 
         <div>
@@ -1286,7 +1298,7 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
               <div class="contact-channel-label">Email</div>
               <div class="contact-channel-value">contact@pvrehouse.com</div>
             </div>
-            <button class="copy-btn" onclick="copyText('contact@pvrehouse.com',this)"><span data-lang="en">Copy</span><span data-lang="th">คัดลอก</span><span data-lang="lo">ຄັດລອກ</span></button>
+            <button class="copy-btn" onclick="copyText('contact@pvrehouse.com',this)"><span data-lang="en">Copy</span><span data-lang="th">คัดลอก</span><span data-lang="lo">ຄັດລອກ</span><span data-lang="zh">复制</span></button>
           </div>
 
           <div class="contact-channel">
@@ -1294,10 +1306,10 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             </div>
             <div>
-              <div class="contact-channel-label">WhatsApp / <span data-lang="en">Phone</span><span data-lang="th">โทร</span><span data-lang="lo">ໂທ</span></div>
+              <div class="contact-channel-label">WhatsApp / <span data-lang="en">Phone</span><span data-lang="th">โทร</span><span data-lang="lo">ໂທ</span><span data-lang="zh">电话</span></div>
               <div class="contact-channel-value">+856 20 91 50 57 73</div>
             </div>
-            <button class="copy-btn" onclick="copyText('+85620915057 73',this)"><span data-lang="en">Copy</span><span data-lang="th">คัดลอก</span><span data-lang="lo">ຄັດລອກ</span></button>
+            <button class="copy-btn" onclick="copyText('+85620915057 73',this)"><span data-lang="en">Copy</span><span data-lang="th">คัดลอก</span><span data-lang="lo">ຄັດລອກ</span><span data-lang="zh">复制</span></button>
           </div>
 
           <div class="contact-channel">
@@ -1308,7 +1320,7 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
               <div class="contact-channel-label">Line ID</div>
               <div class="contact-channel-value">nolan.ly123</div>
             </div>
-            <button class="copy-btn" onclick="copyText('nolan.ly123',this)"><span data-lang="en">Copy</span><span data-lang="th">คัดลอก</span><span data-lang="lo">ຄັດລອກ</span></button>
+            <button class="copy-btn" onclick="copyText('nolan.ly123',this)"><span data-lang="en">Copy</span><span data-lang="th">คัดลอก</span><span data-lang="lo">ຄັດລອກ</span><span data-lang="zh">复制</span></button>
           </div>
 
           <div class="contact-channel">
@@ -1316,7 +1328,7 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div>
-              <div class="contact-channel-label"><span data-lang="en">Location</span><span data-lang="th">ที่ตั้ง</span><span data-lang="lo">ທີ່ຕັ້ງ</span></div>
+              <div class="contact-channel-label"><span data-lang="en">Location</span><span data-lang="th">ที่ตั้ง</span><span data-lang="lo">ທີ່ຕັ້ງ</span><span data-lang="zh">地址</span></div>
               <div class="contact-channel-value">Vientiane, Laos</div>
             </div>
           </div>
@@ -1325,10 +1337,10 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
 
       <div class="fade-up" style="transition-delay:0.18s">
         <div class="contact-form-wrap">
-          <h3 class="form-title"><span data-lang="en">Send a Request</span><span data-lang="th">ส่งคำขอ</span><span data-lang="lo">ສົ່ງຄຳຮ້ອງ</span></h3>
+          <h3 class="form-title"><span data-lang="en">Send a Request</span><span data-lang="th">ส่งคำขอ</span><span data-lang="lo">ສົ່ງຄຳຮ້ອງ</span><span data-lang="zh">发送询价</span></h3>
           <form id="contactForm">
             <div class="form-group">
-              <label class="form-label" for="name"><span data-lang="en">Name / Venue</span><span data-lang="th">ชื่อ / สถานที่</span><span data-lang="lo">ຊື່ / ສະຖານທີ່</span></label>
+              <label class="form-label" for="name"><span data-lang="en">Name / Venue</span><span data-lang="th">ชื่อ / สถานที่</span><span data-lang="lo">ຊື່ / ສະຖານທີ່</span><span data-lang="zh">姓名 / 场所</span></label>
               <input class="form-input" type="text" id="name" required placeholder="Your name or venue name">
             </div>
             <div class="form-group">
@@ -1336,28 +1348,28 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
               <input class="form-input" type="email" id="email" placeholder="your@email.com" required>
             </div>
             <div class="form-group">
-              <label class="form-label" for="service"><span data-lang="en">Request Type</span><span data-lang="th">ประเภทคำขอ</span><span data-lang="lo">ປະເພດຄຳຮ້ອງ</span></label>
+              <label class="form-label" for="service"><span data-lang="en">Request Type</span><span data-lang="th">ประเภทคำขอ</span><span data-lang="lo">ປະເພດຄຳຮ້ອງ</span><span data-lang="zh">需求类型</span></label>
               <select class="form-select" id="service">
-                <option value=""><span data-lang="en">Select a service…</span><span data-lang="th">เลือกบริการ…</span><span data-lang="lo">ເລືອກບໍລິການ…</span></option>
-                <option value="talent-th"><span data-lang="en">Lao Artist — Thailand Market</span><span data-lang="th">ศิลปินลาว — ตลาดไทย</span><span data-lang="lo">ສິລະປິນລາວ — ຕະຫຼາດໄທ</span></option>
-                <option value="talent-lo"><span data-lang="en">Lao Artist — Laos Local</span><span data-lang="th">ศิลปินลาว — ตลาดลาว</span><span data-lang="lo">ສິລະປິນລາວ — ທ້ອງຖິ່ນລາວ</span></option>
-                <option value="dj"><span data-lang="en">International DJ Booking</span><span data-lang="th">จอง DJ นานาชาติ</span><span data-lang="lo">ຈອງ DJ ສາກົນ</span></option>
-                <option value="event"><span data-lang="en">Event Production</span><span data-lang="th">จัดอีเวนต์</span><span data-lang="lo">ຈັດງານ</span></option>
-                <option value="other"><span data-lang="en">Other</span><span data-lang="th">อื่นๆ</span><span data-lang="lo">ອື່ນໆ</span></option>
+                <option value=""><span data-lang="en">Select a service…</span><span data-lang="th">เลือกบริการ…</span><span data-lang="lo">ເລືອກບໍລິການ…</span><span data-lang="zh">选择服务…</span></option>
+                <option value="talent-th"><span data-lang="en">Lao Artist — Thailand Market</span><span data-lang="th">ศิลปินลาว — ตลาดไทย</span><span data-lang="lo">ສິລະປິນລາວ — ຕະຫຼາດໄທ</span><span data-lang="zh">老挝艺人 — 泰国市场</span></option>
+                <option value="talent-lo"><span data-lang="en">Lao Artist — Laos Local</span><span data-lang="th">ศิลปินลาว — ตลาดลาว</span><span data-lang="lo">ສິລະປິນລາວ — ທ້ອງຖິ່ນລາວ</span><span data-lang="zh">老挝艺人 — 老挝本地</span></option>
+                <option value="dj"><span data-lang="en">International DJ Booking</span><span data-lang="th">จอง DJ นานาชาติ</span><span data-lang="lo">ຈອງ DJ ສາກົນ</span><span data-lang="zh">国际 DJ 预约</span></option>
+                <option value="event"><span data-lang="en">Event Production</span><span data-lang="th">จัดอีเวนต์</span><span data-lang="lo">ຈັດງານ</span><span data-lang="zh">活动制作</span></option>
+                <option value="other"><span data-lang="en">Other</span><span data-lang="th">อื่นๆ</span><span data-lang="lo">ອື່ນໆ</span><span data-lang="zh">其他</span></option>
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label" for="message"><span data-lang="en">Message</span><span data-lang="th">ข้อความ</span><span data-lang="lo">ຂໍ້ຄວາມ</span></label>
+              <label class="form-label" for="message"><span data-lang="en">Message</span><span data-lang="th">ข้อความ</span><span data-lang="lo">ຂໍ້ຄວາມ</span><span data-lang="zh">留言</span></label>
               <textarea class="form-textarea" id="message" required placeholder="Tell us about your project — date, venue, type of event, budget…"></textarea>
             </div>
             <button type="submit" class="form-submit">
               <span data-lang="en">Send Request</span>
               <span data-lang="th">ส่งคำขอ</span>
-              <span data-lang="lo">ສົ່ງຄຳຮ້ອງ</span>
+              <span data-lang="lo">ສົ່ງຄຳຮ້ອງ</span><span data-lang="zh">发送</span>
             </button>
           </form>
           <div class="form-success" id="formSuccess">
-            ✦ <span data-lang="en">Message sent — we'll reply within 24h.</span><span data-lang="th">ส่งแล้ว — เราจะตอบกลับภายใน 24 ชม.</span><span data-lang="lo">ສົ່ງແລ້ວ — ພວກເຮົາຈະຕອບກັບພາຍໃນ 24 ຊ.ມ.</span>
+            ✦ <span data-lang="en">Message sent — we'll reply within 24h.</span><span data-lang="th">ส่งแล้ว — เราจะตอบกลับภายใน 24 ชม.</span><span data-lang="lo">ສົ່ງແລ້ວ — ພວກເຮົາຈະຕອບກັບພາຍໃນ 24 ຊ.ມ.</span><span data-lang="zh">留言已发送——我们将在 24 小时内回复。</span>
           </div>
         </div>
       </div>
@@ -1371,9 +1383,9 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding-blo
     <span class="footer-logo" style="display:flex;align-items:center;"><img src="data:image/png;base64,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XMOc175kydLw6KOP9SQK/fWv1QED0BoBMAAUOHbsaE42t/2a32xtb9J+//3LQl7Nb5JpbffS56wzZ04VZKTzMrkVnbT/4Ac/7Mml0Ldv31IHDEBLBMAAUOD48dfqaoHza37zsqN5dbRJe1TQXnX69PwufU67cWMmOnv29Fx/8meBbq/mt9JeXOO8YcMPO+53u8wEDUCrBMAA0MDGjY+2VB/7z//cvTV2T516I5w6daKj7G/izTdPR/PpQ9F4mo3zi19cEu67b3GzwJ98civ65JNbi/mUAAwoATAANHD16pXo6tUrsz8Vz4Scv55u1OY6u12Jees89dSOtvdf6XdU0J6/fbL/F144vCDjaEQdMACtEAADQBOvv34sdKPmN91etD7v6dMnupb9Tdy4MRPduDHTcc1vUe1w0p4e8w9+8MNFzgLfXphPDwAYKgJgAGji6tUr0bVrV2d/ai+LWlwLnN/W7eA3cfbsmdnnaXf3ResgF42n8sMPfvBouO++JaamAqCvCIABoAXHjx9tsn5u52vqnjrV+cRXRW7enInOnj2TytrmZXLbWS+4+fbf//6jvT5tAFBDAAwALbh27WoqCxzarPktrh1OzMxcD6dPL0z2N/HWW2ca7r+dmt/G46q4774l4fvff1QWGIC+IQAGgBY1qwXOq/lNr8ObV/ObtF+/fn1RxvD00zu7UvPbak309763odenDQDmCIABoEXZLHBWXs1v81mgo3D69MkFz/4mbt68Ed28eaNhf2rHUzTO2u0bjfH551+UBQagLwiAAaANb7xxvGvr/aZqfxd1BuO3336z62No9HXvvfeFL37xPkEwAD0nAAaANlSzwFFIan7rRQVttdnVKArh9OmTiz6GmzdvRLdu3QzFM1Q373/eeOszw9WaaJdCA9APBMAA0KYTJ17P1MXWz4rcrOY3jkM4derEol36nPXMM7ujvBre7Hq+rax33EpN9L333he+970NssAA9JQAGADadO3a1Whm5lrOPVFoZ5ndmZnFmfiqyI9/fLba86jx+sTzkX3sd7/7g56OFwAEwAAwD2+8cTzkZX7rM6j5a+SePn0izMxc70n2N/H222ejmzdvNq3hrc/wzn+944MHx2WBAegZATAAzMP169ei69eTLHDrNb8hhDAzMxNOnz7Z0+A3ce7c2Zb6n72vPmMchUbrICdtJsQCoJcE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" alt="PVRE Entertainment Group" style="height:44px;width:auto;object-fit:contain;"></span>
     <span class="footer-copy">© 2025 PVRE Entertainment Group — Vientiane, Laos</span>
     <ul class="footer-links">
-      <li><a href="#services"><span data-lang="en">Services</span><span data-lang="th">บริการ</span><span data-lang="lo">ບໍລິການ</span></a></li>
-      <li><a href="#artist"><span data-lang="en">Artist</span><span data-lang="th">ศิลปิน</span><span data-lang="lo">ສິລະປິນ</span></a></li>
-      <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="th">ติดต่อ</span><span data-lang="lo">ຕິດຕໍ່</span></a></li>
+      <li><a href="#services"><span data-lang="en">Services</span><span data-lang="th">บริการ</span><span data-lang="lo">ບໍລິການ</span><span data-lang="zh">服务</span></a></li>
+      <li><a href="#artist"><span data-lang="en">Artist</span><span data-lang="th">ศิลปิน</span><span data-lang="lo">ສິລະປິນ</span><span data-lang="zh">艺人</span></a></li>
+      <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="th">ติดต่อ</span><span data-lang="lo">ຕິດຕໍ່</span><span data-lang="zh">联系</span></a></li>
     </ul>
   </div>
 </footer>
@@ -1394,7 +1406,7 @@ function setLang(lang) {
   document.body.className = (document.body.className.replace(/lang-\w+/g,'').trim()) + ' lang-' + lang;
   document.querySelectorAll('.lang-btn').forEach(btn => {
     const t = btn.textContent.trim();
-    btn.classList.toggle('active', t === lang.toUpperCase() || (lang === 'lo' && t === 'ລາວ'));
+    btn.classList.toggle('active', t === lang.toUpperCase() || (lang === 'lo' && t === 'ລາວ') || (lang === 'zh' && t === '中文'));
   });
   try { localStorage.setItem('ll-lang', lang); } catch(e) {}
 }
@@ -1403,7 +1415,7 @@ function setLang(lang) {
 (function() {
   var saved;
   try { saved = localStorage.getItem('ll-lang'); } catch(e) {}
-  if (saved && ['en','th','lo'].indexOf(saved) !== -1) { setLang(saved); }
+  if (saved && ['en','th','lo','zh'].indexOf(saved) !== -1) { setLang(saved); }
   else { document.body.classList.add('lang-en'); }
 })();
 
